@@ -8,13 +8,13 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="/css/main/style.css" rel="stylesheet"/>
 
-    <title>Starter Template for Bootstrap</title>
+    <title>储物整理</title>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">整理俺的家</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -22,26 +22,27 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+                <a class="nav-link" href="#">首页 <span class="sr-only"></span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                <a class="nav-link dropdown-toggle" id="house1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">俺的House1</a>
+                <div class="dropdown-menu" aria-labelledby="house1">
+                    <a class="dropdown-item" href="#">管理储物空间</a>
+                    <a class="dropdown-item" href="#">管理物品</a>
+                    <a class="dropdown-item" href="#">删除House</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="option" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">设置</a>
+                <div class="dropdown-menu" aria-labelledby="option">
+                    <a class="dropdown-item" href="#">添加House</a>
                 </div>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="text" placeholder="输入找不到的物品名字" aria-label="Search">
+            <button class="btn btn-outline-default my-2 my-sm-0" type="submit">搜索</button>
         </form>
     </div>
 </nav>
@@ -49,10 +50,7 @@
 <main role="main" class="container" style="max-width:100% !important;">
 
     <div class="content">
-        <h1>Bootstrap starter template</h1>
-        <div class="sm-12">
-            Use this document as a way to quickly start any new project.
-            <br> All you get is this text and a mostly barebones HTML document.
+        <div id="image" style="min-height:600px;min-width:100%">
         </div>
     </div>
 
@@ -61,5 +59,61 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="/js/bootstrap.min.js"></script>
+<script>
+    var xStart = 0;
+    var yStart = 0;
+    var xEnd = 0;
+    var yEnd = 0;
+
+    $(function() {
+        $("#image").mousedown(function(e){
+            xStart=e.pageX-$(this).offset().left; //获取当前鼠标相对div的X坐标
+            yStart=e.pageY-$(this).offset().top; //获取当前鼠标相对div的Y坐标
+            if(xStart && yStart) {
+                $("#inputDiv").remove();
+                var addDivWidth = 1;
+                var addDivHeight = 1;
+                var divX = xStart+1;
+                var divY = yStart+1;
+                var elementDiv = '<div id="inputDiv" style="' +
+                    'width:' + addDivWidth + 'px;' +
+                    'height:' + addDivHeight + 'px;' +
+                    'position:relative;' +
+                    'left:' + divX + 'px;' +
+                    'top:' + divY + 'px;' +
+                    'border:solid 1px #666;' +
+                    'z-index:99' +
+                    '"></div>';
+                $("#image").append(elementDiv);
+            }
+        });
+
+        $("#image").mousemove(function(e){
+            xEnd=e.pageX-$(this).offset().left; //获取当前鼠标相对div的X坐标
+            yEnd=e.pageY-$(this).offset().top; //获取当前鼠标相对div的Y坐标
+            if(xStart && yStart) {
+                var addDivWidth = Math.abs(xEnd - xStart);
+                var addDivHeight = Math.abs(yEnd - yStart);
+                var divX = xEnd > xStart ? xStart : xEnd;
+                var divY = yEnd > yStart ? yStart : yEnd;
+                $("#inputDiv").css("width",addDivWidth);
+                $("#inputDiv").css("height",addDivHeight);
+                $("#inputDiv").css("left",divX);
+                $("#inputDiv").css("top",divY);
+            }
+        });
+
+        $("#image").mouseup(function(e){
+            xEnd=e.pageX-$(this).offset().left; //获取当前鼠标相对div的X坐标
+            yEnd=e.pageY-$(this).offset().top; //获取当前鼠标相对div的Y坐标
+            if(xStart && yStart){
+                xStart = 0;
+                yStart = 0;
+                xEnd = 0;
+                yEnd = 0;
+            }
+        });
+    });
+</script>
 </body>
 </html>
