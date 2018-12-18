@@ -239,10 +239,14 @@
             yStart=e.pageY-$(this).offset().top; //获取当前鼠标相对div的Y坐标
             if(xStart && yStart) {
                 $("#selectionArea").remove();
-                var addDivWidth = 1;
-                var addDivHeight = 1;
-                var divX = xStart+1;
-                var divY = yStart+1;
+                xEnd = xStart+1;
+                yEnd = yStart+1;
+                var path = '<g id="selectionArea"><path d="M'+xStart*10/zoomNumber+' '+yStart*10/zoomNumber +
+                    ' L'+xEnd*10/zoomNumber+' '+yStart*10/zoomNumber +
+                    ' L'+xEnd*10/zoomNumber+' '+yEnd*10/zoomNumber +
+                    ' L'+xStart*10/zoomNumber+' '+yEnd*10/zoomNumber + ' Z" fill="rgba(253,161,103,0.6)"/></g>';
+                $("#planImage").find("svg").append(path);
+                $("#planImage").find("svg").html($("#planImage").find("svg").html());
             }
         });
 
@@ -250,10 +254,14 @@
             xEnd=e.pageX-$(this).offset().left; //获取当前鼠标相对div的X坐标
             yEnd=e.pageY-$(this).offset().top; //获取当前鼠标相对div的Y坐标
             if(xStart && yStart) {
-                var addDivWidth = Math.abs(xEnd - xStart);
-                var addDivHeight = Math.abs(yEnd - yStart);
-                var divX = xEnd > xStart ? xStart : xEnd;
-                var divY = yEnd > yStart ? yStart : yEnd;
+                $("#selectionArea").html(
+                    '<path d="M'+xStart*10/zoomNumber+' '+yStart*10/zoomNumber +
+                    ' L'+xEnd*10/zoomNumber+' '+yStart*10/zoomNumber +
+                    ' L'+xEnd*10/zoomNumber+' '+yEnd*10/zoomNumber +
+                    ' L'+xStart*10/zoomNumber+' '+yEnd*10/zoomNumber + ' Z"' +
+					' fill="rgba(253,161,103,0.6)"/>'
+				);
+                $("#planImage").find("svg").html($("#planImage").find("svg").html());
             }
         });
 
@@ -265,12 +273,7 @@
                 if(xStart === xEnd && yStart === yEnd){
                     $("#selectionArea").remove();
                 }
-				var path = '<g id="selectionArea"><path d="M'+xStart*10/zoomNumber+' '+yStart*10/zoomNumber +
-	                ' L'+xEnd*10/zoomNumber+' '+yStart*10/zoomNumber +
-	                ' L'+xEnd*10/zoomNumber+' '+yEnd*10/zoomNumber +
-	                ' L'+xStart*10/zoomNumber+' '+yEnd*10/zoomNumber + ' Z" fill="rgba(253,161,103,0.6)"/></g>';
-	            $("#planImage").find("svg").append(path);
-	            $("#planImage").find("svg").html($("#planImage").find("svg").html());
+
 	            
                 xStart = 0;
                 yStart = 0;
