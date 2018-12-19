@@ -177,7 +177,7 @@ public class IndexController {
         	ros.write(svg.getBytes());
             ros.flush();
         } catch (IOException e) {
-        	
+
         }
     }
     
