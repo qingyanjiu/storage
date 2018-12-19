@@ -13,12 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("/")
 @Controller
-public class IndexController {
-
-    @RequestMapping("/")
-    public String index() {
-        return ("editHouse");
-    }
+public class HouseController {
 
     @RequestMapping("/getImage")
     public void getImage(HttpServletResponse response) {
