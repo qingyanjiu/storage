@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stream.mokulive.storage.mapper.GoodsMapper">
+
+
+    <insert id="addGoods" parameterType="stream.mokulive.storage.vo.Goods">
+        insert into goods (
+                goodsid,
+                goodname,
+                picture,
+                location,
+                hotpointid,
+                typeid,
+                tagid,
+                buytime,
+                price,
+                modifytime,
+                comment,
+                status
+            )
+            values (
+                #{goodsId},
+                #{goodsName},
+                #{picture},
+                #{location},
+                #{hotPointId},
+                #{typeId},
+                #{tagId},
+                #{buyTime},
+                #{price},
+                now(),
+                #{comment},
+                #{status}
+            )
+    </insert>
+
+    <update id="updateGoods" parameterType="stream.mokulive.storage.vo.Goods">
+        update into goods set
+                goodname=#{goodsName},
+                picture=#{picture},
+                location=#{location},
+                hotpointid=#{hotPointId},
+                typeid=#{typeId},
+                tagid=#{tagId},
+                buytime=#{buyTime},
+                price=#{price},
+                modifytime=now(),
+                comment=#{comment},
+                status=#{status}
+            )
+            where goodsid = #{goodsId}
+    </update>
+
+    <select id="findGoodsListByName" parameterType="string" resultType="stream.mokulive.storage.vo.Goods">
+        select * from goods where goodsname like '%${goodsName}%' and status = '1' and hotpointid is not null
+    </select>
+
+    <select id="findGoodsById" parameterType="string" resultType="stream.mokulive.storage.vo.Goods">
+        select * from goods where goodsid=#{goodsId}
+    </select>
+
+    <select id="findAllGoodsList" parameterType="string" resultType="stream.mokulive.storage.vo.Goods">
+        select
+            g.goodsid,
+            g.goodname,
+            g.picture,
+            g.location,
+            g.hotpointid,
+            g.typeid,
+            g.tagid,
+            g.buytime,
+            g.price,
+            g.modifytime,
+            g.comment,
+            g.status,
+
+        from goods g, hot_points hp
+        where
+        g.hotpointid = hp.id
+        and hp.status='1'
+        and g.status='1'
+    </select>
+
+</mapper>
