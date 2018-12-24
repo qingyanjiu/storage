@@ -71,14 +71,24 @@
             g.buytime,
             g.price,
             g.modifytime,
-            g.comment,
-            g.status,
-
+            g.comment goodscomment,
+            g.status goodstatus,
+            hp.xstart,
+            hp.ystart,
+            hp.xend,
+            hp.yend,
+            hp.hotPointName,
+            hp.comment hotpointcomment,
+            hp.status hotpointstatus,
         from goods g, hot_points hp
         where
         g.hotpointid = hp.id
         and hp.status='1'
         and g.status='1'
+    </select>
+
+    <select id="findGoodsListUnrelatedToHotPoint" parameterType="string" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
+        select * from goods where hotpointid is not null and status='1'
     </select>
 
 </mapper>

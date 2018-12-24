@@ -75,7 +75,7 @@ create table hot_points
 	ystart               varchar(20) comment '热点坐标',
 	xend                 varchar(20) comment '热点坐标',
 	yend                 varchar(20) comment '热点坐标',
-	hotSpotName          varchar(50) comment '热点名称',
+	hotPointName          varchar(50) comment '热点名称',
 	comment              varchar(100) comment '热点描述',
 	status               varchar(10) comment '状态',
 	primary key (id)
