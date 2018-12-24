@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stream.mokulive.storage.mapper.AccessTokenMapper">
+
+    <resultMap id="getAccessToken" type="stream.mokulive.storage.vo.AccessToken">
+        <result property="accessToken" column="access_token" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+    <select id="accessTokenCount" resultType="int">
+        <![CDATA[
+        select count(1) from access_token
+        ]]>
+    </select>
+
+    <insert id="insertAccessToken" parameterType="string">
+        <![CDATA[
+        insert into access_token (access_token, update_date) values (#{accessToken}, date_format(curdate(),'%Y-%m-%d'))
+        ]]>
+    </insert>
+
+    <select id="isTokenNeedToUpdate" resultType="boolean" parameterType="int">
+        <![CDATA[
+        select DATEDIFF(curdate(),(select update_date from access_token)) >= #{threshold}
+        ]]>
+    </select>
+
+    <update id="updateAccessToken" parameterType="string">
+        <![CDATA[
+        update access_token set access_token = #{accessToken}, update_date = date_format(curdate(),'%Y-%m-%d')
+        ]]>
+    </update>
+
+    <select id="getAccessToken" resultMap="getAccessToken">
+        <![CDATA[
+        select * from access_token
+        ]]>
+    </select>
+
+</mapper>
