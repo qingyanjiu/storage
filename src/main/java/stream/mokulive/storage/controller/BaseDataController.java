@@ -12,7 +12,9 @@ import stream.mokulive.storage.utils.Utils;
 import stream.mokulive.storage.vo.AccessToken;
 import stream.mokulive.storage.vo.BaseData;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/baseData")
@@ -65,9 +67,11 @@ public class BaseDataController {
     @ResponseBody
     public Map list(String baseDataId, String dataType) {
     	Map result = new HashMap();
+    	List dataTypeList = new ArrayList();
         try {
-            baseDataService.findBaseDataList(baseDataId, dataType);
+            dataTypeList = baseDataService.findBaseDataList(baseDataId, dataType);
             Utils.tagResult(result,true);
+            result.put("dataTypeList",dataTypeList);
         } catch (Exception e) {
             Utils.tagResult(result,false);
         }

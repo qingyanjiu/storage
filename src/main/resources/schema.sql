@@ -30,7 +30,7 @@ CREATE TABLE `storage_access_token` (
 /*==============================================================*/
 CREATE TABLE storage_base_data
 (
-  id       VARCHAR(20) NOT NULL,
+  id       VARCHAR(50) NOT NULL,
   datatype VARCHAR(20) COMMENT '类型 1-物品类型 2-标签',
   dataname VARCHAR(50) COMMENT 'type或者tag的显示名称',
   comment VARCHAR(100),
