@@ -8,4 +8,6 @@ public interface UserMapper {
 
     Auth0User findById(String userId);
 
+    void addUser(Auth0User user);
+
 }

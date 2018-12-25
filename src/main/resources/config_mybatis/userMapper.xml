@@ -4,7 +4,11 @@
 
 
     <select id="findById" resultType="stream.mokulive.storage.vo.Auth0User">
-        SELECT * FROM user WHERE userId = #{userId}
+        SELECT * FROM storage_user WHERE userId = #{userId}
+    </select>
+
+    <select id="addUser" parameterType="stream.mokulive.storage.vo.Auth0User">
+        insert into storage_user values (#{userId},#{nick},#{avatar},#{email})
     </select>
 
 </mapper>

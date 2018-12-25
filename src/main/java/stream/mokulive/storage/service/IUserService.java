@@ -13,10 +13,10 @@ public interface IUserService {
 
     /**
      * 添加用户信息，添加成功返回true
-     * @param userId
+     * @param user
      * @return
      */
-    boolean addUser(String userId);
+    void addUser(Auth0User user) throws Exception;
 
 
 }

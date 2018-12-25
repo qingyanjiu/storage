@@ -10,9 +10,17 @@ public class Goods {
      */
     private String goodsId;
     /**
+     * 用户 id
+     */
+    private String userId;
+    /**
      * 物品名称
      */
     private String goodsName;
+    /**
+     * 物品所有者名称
+     */
+    private String owername;
     /**
      * 物品图片
      */
@@ -52,7 +60,7 @@ public class Goods {
     /**
      * 物品状态 (1-有效 0-失效)
      */
-    private String status;
+    private String status = GOODS_STATUS_ENABLED;
 
     public String getGoodsId() {
         return goodsId;
@@ -60,6 +68,22 @@ public class Goods {
 
     public void setGoodsId(String goodsId) {
         this.goodsId = goodsId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getOwername() {
+        return owername;
+    }
+
+    public void setOwername(String owername) {
+        this.owername = owername;
     }
 
     public String getGoodsName() {

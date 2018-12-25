@@ -9,31 +9,31 @@
 
     <select id="accessTokenCount" resultType="int">
         <![CDATA[
-        select count(1) from access_token
+        select count(1) from storage_access_token
         ]]>
     </select>
 
     <insert id="insertAccessToken" parameterType="string">
         <![CDATA[
-        insert into access_token (access_token, update_date) values (#{accessToken}, date_format(curdate(),'%Y-%m-%d'))
+        insert into storage_access_token (access_token, update_date) values (#{accessToken}, date_format(curdate(),'%Y-%m-%d'))
         ]]>
     </insert>
 
     <select id="isTokenNeedToUpdate" resultType="boolean" parameterType="int">
         <![CDATA[
-        select DATEDIFF(curdate(),(select update_date from access_token)) >= #{threshold}
+        select DATEDIFF(curdate(),(select update_date from storage_access_token)) >= #{threshold}
         ]]>
     </select>
 
     <update id="updateAccessToken" parameterType="string">
         <![CDATA[
-        update access_token set access_token = #{accessToken}, update_date = date_format(curdate(),'%Y-%m-%d')
+        update access_token set storage_access_token = #{accessToken}, update_date = date_format(curdate(),'%Y-%m-%d')
         ]]>
     </update>
 
     <select id="getAccessToken" resultMap="getAccessToken">
         <![CDATA[
-        select * from access_token
+        select * from storage_access_token
         ]]>
     </select>
 

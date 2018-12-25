@@ -4,10 +4,22 @@ package stream.mokulive.storage.vo;
  * 热点，可以理解为储存柜或者橱子，存放物品的容器
  */
 public class HotPoint {
+
+    private static final String HOTPOINT_STATUS_ENABLED = "1";
+    private static final String HOTPOINT_STATUS_DISABLED = "0";
+
     /**
      * 热点id
      */
     private String id;
+    /**
+     * 用户id
+     */
+    private String userId;
+    /**
+     * 建筑物id
+     */
+    private String buildingId;
     /**
      * 物品收纳位置 平面图起始点横坐标
      */
@@ -35,7 +47,7 @@ public class HotPoint {
     /**
      * 状态 (1-有效 0-失效)
      */
-    private String status;
+    private String status = HOTPOINT_STATUS_ENABLED;
 
     public String getId() {
         return id;
@@ -43,6 +55,22 @@ public class HotPoint {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getBuildingId() {
+        return buildingId;
+    }
+
+    public void setBuildingId(String buildingId) {
+        this.buildingId = buildingId;
     }
 
     public String getXstart() {

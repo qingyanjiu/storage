@@ -4,8 +4,10 @@
 
 
     <insert id="addGoods" parameterType="stream.mokulive.storage.vo.Goods">
-        insert into goods (
+        insert into storage_goods (
                 goodsid,
+                userid,
+                owername,
                 goodname,
                 picture,
                 location,
@@ -20,6 +22,8 @@
             )
             values (
                 #{goodsId},
+                #{userid},
+                #{owername},
                 #{goodsName},
                 #{picture},
                 #{location},
@@ -35,8 +39,10 @@
     </insert>
 
     <update id="updateGoods" parameterType="stream.mokulive.storage.vo.Goods">
-        update into goods set
+        update storage_goods set
                 goodname=#{goodsName},
+                userid=#{userId},
+                owername=#{owername},
                 picture=#{picture},
                 location=#{location},
                 hotpointid=#{hotPointId},
@@ -47,48 +53,66 @@
                 modifytime=now(),
                 comment=#{comment},
                 status=#{status}
-            )
             where goodsid = #{goodsId}
     </update>
 
-    <select id="findGoodsListByName" parameterType="string" resultType="stream.mokulive.storage.vo.Goods">
-        select * from goods where goodsname like '%${goodsName}%' and status = '1' and hotpointid is not null
+    <update id="deleteGoods" parameterType="hashmap">
+        update storage_goods
+        set status='0'
+        where goodsid = #{goodsId}
+    </update>
+
+    <select id="findGoodsListByName" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
+        select * from storage_view_goods where
+        goodsname like '%${goodsName}%'
+        and goodstatus='1'
+        and hotpointstatus='1'
+        and userid = #{userId}
     </select>
 
-    <select id="findGoodsById" parameterType="string" resultType="stream.mokulive.storage.vo.Goods">
-        select * from goods where goodsid=#{goodsId}
+    <select id="findGoodsById" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
+        select * from storage_view_goods where goodsid=#{goodsId}
     </select>
 
-    <select id="findAllGoodsList" parameterType="string" resultType="stream.mokulive.storage.vo.Goods">
+    <select id="findAllGoodsList" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
         select
-            g.goodsid,
-            g.goodname,
-            g.picture,
-            g.location,
-            g.hotpointid,
-            g.typeid,
-            g.tagid,
-            g.buytime,
-            g.price,
-            g.modifytime,
-            g.comment goodscomment,
-            g.status goodstatus,
-            hp.xstart,
-            hp.ystart,
-            hp.xend,
-            hp.yend,
-            hp.hotPointName,
-            hp.comment hotpointcomment,
-            hp.status hotpointstatus,
-        from goods g, hot_points hp
+--             goodsid,
+--             userid,
+--             goodname,
+--             owername,
+--             picture,
+--             location,
+--             hotpointid,
+--             typeid,
+--             tagid,
+--             buytime,
+--             price,
+--             modifytime,
+--             goodscomment,
+--             goodstatus,
+--             xstart,
+--             ystart,
+--             xend,
+--             yend,
+--             hotPointName,
+--             hotpointcomment,
+--             hotpointstatus,
+--             datatype,
+--             dataname,
+--             basedatacomment
+              *
+        from storage_view_goods
         where
-        g.hotpointid = hp.id
-        and hp.status='1'
-        and g.status='1'
+        and goodstatus='1'
+        and hotpointstatus='1'
+        and userid=#{userid}
     </select>
 
-    <select id="findGoodsListUnrelatedToHotPoint" parameterType="string" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
-        select * from goods where hotpointid is not null and status='1'
+    <select id="findGoodsListUnrelatedToHotPoint" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
+        select * from storage_view_goods
+        where hotpointid is null
+        and goodstatus='1'
+        and userid=#{userId}
     </select>
 
 </mapper>

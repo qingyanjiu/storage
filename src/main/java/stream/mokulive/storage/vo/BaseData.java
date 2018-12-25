@@ -11,7 +11,7 @@ public class BaseData {
 
     private String dataName;
 
-    private String comments;
+    private String comment;
 
     public String getId() {
         return id;
@@ -37,11 +37,11 @@ public class BaseData {
         this.dataName = dataName;
     }
 
-    public String getComments() {
-        return comments;
+    public String getComment() {
+        return comment;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

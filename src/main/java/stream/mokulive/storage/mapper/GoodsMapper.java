@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import stream.mokulive.storage.vo.Goods;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface GoodsMapper {
@@ -12,12 +13,14 @@ public interface GoodsMapper {
 
     void updateGoods(Goods goods);
 
-    List<Goods> findGoodsListByName(String goodsName);
+    void deleteGoods(Map params);
 
-    Goods findGoodsById(String goodsId);
+    List<Goods> findGoodsListByName(Map params);
 
-    List<Goods> findAllGoodsList();
+    Goods findGoodsById(Map params);
 
-    List<Goods> findGoodsListUnrelatedToHotPoint();
+    List<Goods> findAllGoodsList(Map params);
+
+    List<Goods> findGoodsListUnrelatedToHotPoint(Map params);
 
 }
