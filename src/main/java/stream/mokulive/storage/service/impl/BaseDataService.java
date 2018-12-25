@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stream.mokulive.storage.mapper.BaseDataMapper;
 import stream.mokulive.storage.service.IBaseDataService;
+import stream.mokulive.storage.utils.IdGenerator;
 import stream.mokulive.storage.vo.BaseData;
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public class BaseDataService implements IBaseDataService {
 
     @Override
     public void addBaseData(BaseData baseData) throws Exception {
+        baseData.setId(IdGenerator.generate());
         baseDataMapper.addBaseData(baseData);
     }
 

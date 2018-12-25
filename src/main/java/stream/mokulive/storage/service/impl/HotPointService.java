@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stream.mokulive.storage.mapper.HotPointMapper;
 import stream.mokulive.storage.service.IHotPointService;
+import stream.mokulive.storage.utils.IdGenerator;
 import stream.mokulive.storage.vo.HotPoint;
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public class HotPointService implements IHotPointService {
 
     @Override
     public void addHotPoint(HotPoint hotPoint) {
+        hotPoint.setId(IdGenerator.generate());
         hotPointMapper.addHotPoint(hotPoint);
     }
 

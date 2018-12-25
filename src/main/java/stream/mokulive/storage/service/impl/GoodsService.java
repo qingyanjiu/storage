@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stream.mokulive.storage.mapper.GoodsMapper;
 import stream.mokulive.storage.service.IGoodsService;
+import stream.mokulive.storage.utils.IdGenerator;
 import stream.mokulive.storage.vo.Goods;
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public class GoodsService implements IGoodsService {
 
     @Override
     public void addGoods(Goods goods) {
+        goods.setGoodsId(IdGenerator.generate());
         goodsMapper.addGoods(goods);
     }
 

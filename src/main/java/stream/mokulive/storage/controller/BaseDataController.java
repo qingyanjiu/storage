@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import stream.mokulive.storage.service.IAccessTokenService;
 import stream.mokulive.storage.service.IBaseDataService;
+import stream.mokulive.storage.utils.Utils;
 import stream.mokulive.storage.vo.AccessToken;
 import stream.mokulive.storage.vo.BaseData;
 
@@ -27,9 +28,9 @@ public class BaseDataController {
     	Map result = new HashMap();
         try {
             baseDataService.addBaseData(baseData);
-            result.put("success",true);
+            Utils.tagResult(result,true);
         } catch (Exception e) {
-            result.put("success",false);
+            Utils.tagResult(result,false);
         }
         return result;
     }
@@ -40,9 +41,9 @@ public class BaseDataController {
     	Map result = new HashMap();
         try {
             baseDataService.updateBaseData(baseData);
-            result.put("success",true);
+            Utils.tagResult(result,true);
         } catch (Exception e) {
-            result.put("success",false);
+            Utils.tagResult(result,false);
         }
         return result;
     }
@@ -53,9 +54,9 @@ public class BaseDataController {
     	Map result = new HashMap();
         try {
             baseDataService.deleteBaseData(baseDataId);
-            result.put("success",true);
+            Utils.tagResult(result,true);
         } catch (Exception e) {
-            result.put("success",false);
+            Utils.tagResult(result,false);
         }
         return result;
     }
@@ -66,9 +67,9 @@ public class BaseDataController {
     	Map result = new HashMap();
         try {
             baseDataService.findBaseDataList(baseDataId, dataType);
-            result.put("success",true);
+            Utils.tagResult(result,true);
         } catch (Exception e) {
-            result.put("success",false);
+            Utils.tagResult(result,false);
         }
         return result;
     }

@@ -6,5 +6,5 @@ public interface IAccessTokenService {
 
     void updateAccessToken() throws Exception;
 
-    AccessToken getAccessToken();
+    AccessToken getAccessToken() throws Exception;
 }

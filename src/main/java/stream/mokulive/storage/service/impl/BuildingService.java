@@ -1,9 +1,11 @@
 package stream.mokulive.storage.service.impl;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stream.mokulive.storage.mapper.BuildingMapper;
 import stream.mokulive.storage.service.IBuildingService;
+import stream.mokulive.storage.utils.IdGenerator;
 import stream.mokulive.storage.vo.Building;
 
 import java.util.ArrayList;
@@ -18,24 +20,25 @@ public class BuildingService implements IBuildingService {
     private BuildingMapper buildingMapper;
 
     @Override
-    public void addBuilding(Building building) {
+    public void addBuilding(Building building) throws Exception {
+        building.setBuildingId(IdGenerator.generate());
         buildingMapper.addBuilding(building);
     }
 
     @Override
-    public void updateBuilding(Building building) {
+    public void updateBuilding(Building building) throws Exception {
         buildingMapper.updateBuilding(building);
     }
 
     @Override
-    public void deleteBuilding(String buildingId) {
+    public void deleteBuilding(String buildingId) throws Exception {
         Map params = new HashMap();
         params.put("buildingId",buildingId);
         buildingMapper.deleteBuilding(params);
     }
 
     @Override
-    public Building findBuildingById(String buildingId) {
+    public Building findBuildingById(String buildingId) throws Exception {
         Building building = new Building();
         Map params = new HashMap();
         params.put("buildingId",buildingId);
@@ -48,7 +51,7 @@ public class BuildingService implements IBuildingService {
     }
 
     @Override
-    public List<Building> findBuildingList(String userId) {
+    public List<Building> findBuildingList(String userId) throws Exception {
         Map params = new HashMap();
         params.put("userId",userId);
         return buildingMapper.findBuildingList(params);

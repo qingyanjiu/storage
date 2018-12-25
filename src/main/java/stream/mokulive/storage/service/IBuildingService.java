@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface IBuildingService {
 
-    void addBuilding(Building building);
+    void addBuilding(Building building) throws Exception;
 
-    void updateBuilding(Building building);
+    void updateBuilding(Building building) throws Exception;
 
-    void deleteBuilding(String buildingId);
+    void deleteBuilding(String buildingId) throws Exception;
 
-    Building findBuildingById(String buildingId);
+    Building findBuildingById(String buildingId) throws Exception;
 
-    List<Building> findBuildingList(String userId);
+    List<Building> findBuildingList(String userId) throws Exception;
 }
