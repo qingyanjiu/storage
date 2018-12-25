@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stream.mokulive.storage.mapper.BaseDataMapper">
+
+
+    <insert id="addBaseData" parameterType="stream.mokulive.storage.vo.BaseData">
+        insert into storage_base_data values(
+          #{id},
+          #{dataType},
+          #{dataName},
+          #{comment}
+        )
+    </insert>
+
+    <update id="updateBaseData" parameterType="stream.mokulive.storage.vo.BaseData">
+        update storage_base_data set
+          datatype=#{dataType},
+          dataname=#{dataName},
+          comment=#{comment}
+        WHERE
+          id=#{baseDataId}
+    </update>
+
+    <delete id="deleteBaseData" parameterType="hashmap">
+        delete from storage_base_data
+        WHERE
+          id=#{baseDataId}
+    </delete>
+
+    <select id="findBaseDataList" parameterType="map" resultType="stream.mokulive.storage.vo.BaseData">
+        select * from storage_base_data
+        WHERE
+        1=1
+        <if test="baseDataId !=null and baseDataId != ''">
+            and id=#{baseDataId}
+        </if>
+        <if test="dataType !=null and dataType != ''">
+            and dataType=#{dataType}
+        </if>
+    </select>
+
+</mapper>

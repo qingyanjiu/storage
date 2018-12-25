@@ -4,7 +4,7 @@ import stream.mokulive.storage.vo.AccessToken;
 
 public interface IAccessTokenService {
 
-    void updateAccessToken();
+    void updateAccessToken() throws Exception;
 
     AccessToken getAccessToken();
 }

@@ -101,6 +101,12 @@ public class GoodsMapperBean {
 
     private String baseDataComment;
 
+    private String buildingName;
+
+    private String planPicture;
+
+    private String buildingComment;
+
     public String getGoodsId() {
         return goodsId;
     }
@@ -299,5 +305,29 @@ public class GoodsMapperBean {
 
     public void setBaseDataComment(String baseDataComment) {
         this.baseDataComment = baseDataComment;
+    }
+
+    public String getBuildingName() {
+        return buildingName;
+    }
+
+    public void setBuildingName(String buildingName) {
+        this.buildingName = buildingName;
+    }
+
+    public String getPlanPicture() {
+        return planPicture;
+    }
+
+    public void setPlanPicture(String planPicture) {
+        this.planPicture = planPicture;
+    }
+
+    public String getBuildingComment() {
+        return buildingComment;
+    }
+
+    public void setBuildingComment(String buildingComment) {
+        this.buildingComment = buildingComment;
     }
 }

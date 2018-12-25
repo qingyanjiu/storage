@@ -11,6 +11,8 @@ import stream.mokulive.storage.service.IAccessTokenService;
 import stream.mokulive.storage.utils.AccessTokenHelper;
 import stream.mokulive.storage.vo.AccessToken;
 
+import java.util.concurrent.ExecutionException;
+
 @Service
 public class AccessTokenService implements IAccessTokenService {
 
@@ -28,7 +30,7 @@ public class AccessTokenService implements IAccessTokenService {
 
 
     @Override
-    public void updateAccessToken() {
+    public void updateAccessToken() throws Exception{
         String accessToken = null;
         int count = accessTokenMapper.accessTokenCount();
         if(count == 0){
@@ -39,6 +41,7 @@ public class AccessTokenService implements IAccessTokenService {
                 logger.info("插入access token成功");
             } catch (UnirestException e) {
                 logger.error("获取新access token出错 -- accessTokenMapper.insertAccessToken", e);
+                throw new Exception(e);
             }
         }
         else if(count == 1){
@@ -51,6 +54,7 @@ public class AccessTokenService implements IAccessTokenService {
                     logger.info("access token更新成功");
                 } catch (UnirestException e) {
                     logger.error("获取新access token出错 -- accessTokenMapper.updateAccessToken", e);
+                    throw new Exception(e);
                 }
             }
         }

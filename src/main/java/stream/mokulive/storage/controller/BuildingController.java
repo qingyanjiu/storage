@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("/")
 @Controller
-public class HouseController {
+public class BuildingController {
 
     @RequestMapping("updateImage")
     @ResponseBody

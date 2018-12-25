@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stream.mokulive.storage.mapper.BuildingMapper">
+
+
+    <insert id="addBuilding" parameterType="stream.mokulive.storage.vo.Building">
+        insert into storage_building values(
+          #{buildingId},
+          #{userId},
+          #{buildingName},
+          #{planPicture},
+          #{comment},
+          #{status}
+        )
+    </insert>
+
+    <update id="updateBuilding" parameterType="stream.mokulive.storage.vo.Building">
+        update storage_building set
+          userId=#{userId},
+          buildingName=#{buildingName},
+          planPicture=#{planPicture},
+          comment=#{comment},
+          status=#{status}
+        WHERE
+          buildingId=#{buildingId}
+    </update>
+
+    <delete id="deleteBuilding" parameterType="hashmap">
+        delete from storage_building
+        WHERE
+          buildingId=#{buildingId}
+    </delete>
+
+    <select id="findBuildingList" parameterType="hashmap" resultType="stream.mokulive.storage.vo.Building">
+        select * from storage_building
+        WHERE
+        1=1
+        <if test="buildingId !=null and buildingId != ''">
+            and buildingId=#{buildingId}
+        </if>
+        <if test="userId !=null and userId != ''">
+            and userId=#{userId}
+        </if>
+    </select>
+
+</mapper>

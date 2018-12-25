@@ -6,13 +6,9 @@
 
 DROP TABLE IF EXISTS storage_access_token;
 DROP TABLE IF EXISTS storage_base_data;
-
 DROP TABLE IF EXISTS storage_goods;
-
-DROP TABLE IF EXISTS storage_goods_hotpoints_relation;
-
 DROP TABLE IF EXISTS storage_hot_points;
-
+DROP TABLE IF EXISTS storage_building;
 DROP TABLE IF EXISTS storage_user;
 DROP view IF EXISTS storage_view_goods;
 
@@ -75,7 +71,7 @@ ALTER TABLE storage_goods
 /*==============================================================*/
 CREATE TABLE storage_hot_points
 (
-  id           VARCHAR(10) NOT NULL,
+  id           VARCHAR(50) NOT NULL,
   userId       VARCHAR(50) NOT NULL COMMENT '用户id',
   buildingId   VARCHAR(50) NOT NULL COMMENT '建筑物id',
   xstart       VARCHAR(20) COMMENT '热点坐标',
@@ -92,6 +88,23 @@ ALTER TABLE storage_hot_points
   COMMENT '热点（收纳家具）表';
 
 /*==============================================================*/
+/* Table: building                                                  */
+/*==============================================================*/
+CREATE TABLE storage_building
+(
+  buildingId VARCHAR(50) NOT NULL COMMENT 'id',
+  userId VARCHAR(50) NOT NULL COMMENT '用户id',
+  buildingName   VARCHAR(50) NOT NULL COMMENT '建筑物名字',
+  planPicture VARCHAR(100) NOT NULL COMMENT '平面图url',
+  comment  VARCHAR(100) COMMENT '描述',
+  status  VARCHAR(10) COMMENT '状态',
+  PRIMARY KEY (buildingId)
+);
+
+ALTER TABLE storage_building
+  COMMENT '建筑物表';
+
+/*==============================================================*/
 /* Table: user                                                  */
 /*==============================================================*/
 CREATE TABLE storage_user
@@ -106,6 +119,7 @@ CREATE TABLE storage_user
 
 ALTER TABLE storage_user
   COMMENT '用户表';
+
 
 /*==============================================================*/
 /* View: goods_info                                                  */
@@ -136,9 +150,13 @@ create view storage_view_goods as
     `hp`.`status`       AS `hotpointstatus`,
     `bd`.`datatype`     AS `datatype`,
     `bd`.`dataname`     AS `dataname`,
-    `bd`.`comment`     AS `basedatacomment`
+    `bd`.`comment`     AS `basedatacomment`,
+    `sb`.`buildingName`     AS `buildingName`,
+    `sb`.`planPicture`     AS `planPicture`,
+    `sb`.`comment`     AS `buildingComment`
   FROM (`storage_goods` `g`
-    LEFT JOIN `storage_hot_points` `hp` on (`g`.`hotpointid` = `hp`.`id`)
-    JOIN `storage_base_data` `bd`)
+    LEFT JOIN `storage_hot_points` `hp` on `g`.`hotpointid` = `hp`.`id`
+    JOIN `storage_base_data` `bd`
+    LEFT JOIN `storage_building` `sb` on `hp`.`buildingId` = `sb`.`buildingId`)
   WHERE (((`g`.`typeId` = `bd`.`id`) AND (`bd`.`datatype` = '1')) OR
          ((`g`.`tagId` = `bd`.`id`) AND (`bd`.`datatype` = '2')))
