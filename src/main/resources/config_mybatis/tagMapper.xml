@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stream.mokulive.storage.mapper.TagMapper">
+
+    <select id="checkName" parameterType="hashmap" resultType="int">
+        select count(1) from storage_tag where tagname=#{tagName}
+    </select>
+
+    <insert id="addTag" parameterType="stream.mokulive.storage.vo.Tag">
+        insert into storage_tag values(
+          #{tagId},
+          #{tagName},
+          #{tagComment}
+        )
+    </insert>
+
+    <update id="updateTag" parameterType="stream.mokulive.storage.vo.Tag">
+        update storage_tag set
+          tagName=#{tagName},
+          tagComment=#{tagComment}
+        WHERE
+          tagId=#{tagId}
+    </update>
+
+    <delete id="deleteTag" parameterType="hashmap">
+        delete from storage_tag
+        WHERE
+          tagId=#{tagId}
+    </delete>
+
+    <select id="findTagList" parameterType="map" resultType="stream.mokulive.storage.vo.Tag" fetchSize="1000">
+        select * from storage_tag
+        WHERE
+        1=1
+        <if test="tagId !=null and tagId != ''">
+            and tagId=#{tagId}
+        </if>
+        order by tagName
+    </select>
+
+</mapper>

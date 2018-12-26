@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stream.mokulive.storage.mapper.TypeMapper">
+
+    <select id="checkName" parameterType="hashmap" resultType="int">
+        select count(1) from storage_type where typename=#{typeName}
+    </select>
+
+    <insert id="addType" parameterType="stream.mokulive.storage.vo.Type">
+        insert into storage_type values(
+          #{typeId},
+          #{typeName},
+          #{parentTypeId},
+          #{typeComment}
+        )
+    </insert>
+
+    <update id="updateType" parameterType="stream.mokulive.storage.vo.Type">
+        update storage_type set
+          typename=#{typeName},
+          parenttypeid=#{parentTypeId},
+          typecomment=#{typeComment}
+        WHERE
+          typeid=#{typeId}
+    </update>
+
+    <delete id="deleteType" parameterType="hashmap">
+        delete from storage_type
+        WHERE
+          typeid=#{typeId}
+    </delete>
+
+    <select id="findTypeList" parameterType="map" resultType="stream.mokulive.storage.vo.Type" fetchSize="1000">
+        select * from storage_type
+        WHERE
+        1=1
+        <if test="typeId !=null and typeId != ''">
+            and typeid=#{typeId}
+        </if>
+        order by typename
+    </select>
+
+</mapper>

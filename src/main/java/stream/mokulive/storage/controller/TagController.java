@@ -6,43 +6,45 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import stream.mokulive.storage.service.IAccessTokenService;
-import stream.mokulive.storage.service.IBaseDataService;
+import stream.mokulive.storage.exception.DuplicateNameException;
+import stream.mokulive.storage.service.ITagService;
 import stream.mokulive.storage.utils.Utils;
-import stream.mokulive.storage.vo.AccessToken;
-import stream.mokulive.storage.vo.BaseData;
+import stream.mokulive.storage.vo.Tag;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/baseData")
+@RequestMapping("/tag")
 @Controller
-public class BaseDataController {
+public class TagController {
 
     @Autowired
-    private IBaseDataService baseDataService;
+    private ITagService tagService;
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public Map add(BaseData baseData) {
+    public Map add(Tag tag) {
     	Map result = new HashMap();
         try {
-            baseDataService.addBaseData(baseData);
+            tagService.addTag(tag);
             Utils.tagResult(result,true);
         } catch (Exception e) {
             Utils.tagResult(result,false);
+            if(e instanceof DuplicateNameException){
+                result.put("msg","Duplicate name");
+            }
         }
         return result;
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
-    public Map update(BaseData baseData) {
+    public Map update(Tag tag) {
     	Map result = new HashMap();
         try {
-            baseDataService.updateBaseData(baseData);
+            tagService.updateTag(tag);
             Utils.tagResult(result,true);
         } catch (Exception e) {
             Utils.tagResult(result,false);
@@ -50,13 +52,28 @@ public class BaseDataController {
         return result;
     }
 
-    @RequestMapping(value = "delete/{baseDataId}", method = RequestMethod.POST)
+    @RequestMapping(value = "delete/{tagId}", method = RequestMethod.POST)
     @ResponseBody
-    public Map delete(@PathVariable("baseDataId") String baseDataId) {
+    public Map delete(@PathVariable("tagId") String tagId) {
     	Map result = new HashMap();
         try {
-            baseDataService.deleteBaseData(baseDataId);
+            tagService.deleteTag(tagId);
             Utils.tagResult(result,true);
+        } catch (Exception e) {
+            Utils.tagResult(result,false);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "{tagId}", method = RequestMethod.POST)
+    @ResponseBody
+    public Map findById(@PathVariable("tagId") String tagId) {
+        Map result = new HashMap();
+        Tag tag = new Tag();
+        try {
+            tag = tagService.findTagById(tagId);
+            Utils.tagResult(result,true);
+            result.put("tag",tag);
         } catch (Exception e) {
             Utils.tagResult(result,false);
         }
@@ -65,13 +82,13 @@ public class BaseDataController {
 
     @RequestMapping(value = "list", method = RequestMethod.POST)
     @ResponseBody
-    public Map list(String baseDataId, String dataType) {
+    public Map list() {
     	Map result = new HashMap();
-    	List dataTypeList = new ArrayList();
+    	List tagList = new ArrayList();
         try {
-            dataTypeList = baseDataService.findBaseDataList(baseDataId, dataType);
+            tagList = tagService.findTagList();
             Utils.tagResult(result,true);
-            result.put("dataTypeList",dataTypeList);
+            result.put("tagList",tagList);
         } catch (Exception e) {
             Utils.tagResult(result,false);
         }

@@ -5,17 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import stream.mokulive.storage.exception.DuplicateNameException;
 import stream.mokulive.storage.service.IBuildingService;
 import stream.mokulive.storage.utils.Utils;
-import stream.mokulive.storage.vo.BaseData;
 import stream.mokulive.storage.vo.Building;
 
 @RequestMapping("/building")
@@ -34,6 +32,9 @@ public class BuildingController {
             Utils.tagResult(result,true);
         } catch (Exception e) {
             Utils.tagResult(result,false);
+            if(e instanceof DuplicateNameException){
+                result.put("msg","Duplicate name");
+            }
         }
         return result;
     }

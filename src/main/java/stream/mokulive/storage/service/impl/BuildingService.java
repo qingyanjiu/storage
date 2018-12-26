@@ -1,8 +1,8 @@
 package stream.mokulive.storage.service.impl;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stream.mokulive.storage.exception.DuplicateNameException;
 import stream.mokulive.storage.mapper.BuildingMapper;
 import stream.mokulive.storage.service.IBuildingService;
 import stream.mokulive.storage.utils.IdGenerator;
@@ -21,8 +21,15 @@ public class BuildingService implements IBuildingService {
 
     @Override
     public void addBuilding(Building building) throws Exception {
-        building.setBuildingId(IdGenerator.generate());
-        buildingMapper.addBuilding(building);
+        Map params = new HashMap();
+        params.put("buildingName",building.getBuildingName());
+        int count = buildingMapper.checkName(params);
+        if(count == 0) {
+            building.setBuildingId(IdGenerator.generate());
+            buildingMapper.addBuilding(building);
+        }else{
+            throw new DuplicateNameException();
+        }
     }
 
     @Override
@@ -39,7 +46,7 @@ public class BuildingService implements IBuildingService {
 
     @Override
     public Building findBuildingById(String buildingId) throws Exception {
-        Building building = new Building();
+        Building building = null;
         Map params = new HashMap();
         params.put("buildingId",buildingId);
         List<Building> list = new ArrayList();

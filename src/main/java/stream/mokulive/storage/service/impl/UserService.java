@@ -13,7 +13,7 @@ public class UserService implements IUserService {
     private UserMapper userMapper;
 
     @Override
-    public Auth0User checkUser(String userId) {
+    public Auth0User checkUser(String userId) throws Exception {
         return userMapper.findById(userId);
     }
 

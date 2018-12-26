@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="stream.mokulive.storage.mapper.GoodsMapper">
 
+    <select id="checkName" parameterType="hashmap" resultType="int">
+        select count(1) from storage_goods
+        where goodsname=#{goodsName}
+        and userid=#{userId}
+    </select>
 
     <insert id="addGoods" parameterType="stream.mokulive.storage.vo.Goods">
         insert into storage_goods (
@@ -62,7 +67,7 @@
         where goodsid = #{goodsId}
     </update>
 
-    <select id="findGoodsListByName" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
+    <select id="findGoodsListByName" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean" fetchSize="1000">
         select * from storage_view_goods where
         goodsname like '%${goodsName}%'
         and goodstatus='1'
@@ -74,7 +79,7 @@
         select * from storage_view_goods where goodsid=#{goodsId}
     </select>
 
-    <select id="findAllGoodsList" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
+    <select id="findAllGoodsList" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean" fetchSize="1000">
         select
 --             goodsid,
 --             userid,
@@ -108,7 +113,7 @@
         and userid=#{userid}
     </select>
 
-    <select id="findGoodsListUnrelatedToHotPoint" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean">
+    <select id="findGoodsListUnrelatedToHotPoint" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean" fetchSize="1000">
         select * from storage_view_goods
         where hotpointid is null
         and goodstatus='1'

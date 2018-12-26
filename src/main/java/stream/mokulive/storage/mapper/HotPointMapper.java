@@ -10,6 +10,8 @@ import java.util.Map;
 @Repository
 public interface HotPointMapper {
 
+    int checkName(Map params);
+
     void addHotPoint(HotPoint hotPoint);
 
     void updateHotPoint(HotPoint hotPoint);

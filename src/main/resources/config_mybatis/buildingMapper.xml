@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="stream.mokulive.storage.mapper.BuildingMapper">
 
+    <select id="checkName" parameterType="hashmap" resultType="int">
+        select count(1) from storage_building
+        where buildingname=#{buildingName}
+        and userid=#{userId}
+    </select>
 
     <insert id="addBuilding" parameterType="stream.mokulive.storage.vo.Building">
         insert into storage_building values(
@@ -31,7 +36,7 @@
           buildingId=#{buildingId}
     </delete>
 
-    <select id="findBuildingList" parameterType="hashmap" resultType="stream.mokulive.storage.vo.Building">
+    <select id="findBuildingList" parameterType="hashmap" resultType="stream.mokulive.storage.vo.Building" fetchSize="1000">
         select * from storage_building
         WHERE
         1=1

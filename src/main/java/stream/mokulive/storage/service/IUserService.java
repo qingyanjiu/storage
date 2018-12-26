@@ -9,7 +9,7 @@ public interface IUserService {
      * @param userId
      * @return
      */
-    Auth0User checkUser(String userId);
+    Auth0User checkUser(String userId) throws Exception;
 
     /**
      * 添加用户信息，添加成功返回true

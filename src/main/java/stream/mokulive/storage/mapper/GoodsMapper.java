@@ -9,6 +9,8 @@ import java.util.Map;
 @Repository
 public interface GoodsMapper {
 
+    int checkName(Map params);
+
     void addGoods(Goods goods);
 
     void updateGoods(Goods goods);

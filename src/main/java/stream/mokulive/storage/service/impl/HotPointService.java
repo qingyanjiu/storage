@@ -2,6 +2,7 @@ package stream.mokulive.storage.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import stream.mokulive.storage.exception.DuplicateNameException;
 import stream.mokulive.storage.mapper.HotPointMapper;
 import stream.mokulive.storage.service.IHotPointService;
 import stream.mokulive.storage.utils.IdGenerator;
@@ -18,33 +19,39 @@ public class HotPointService implements IHotPointService {
     private HotPointMapper hotPointMapper;
 
     @Override
-    public void addHotPoint(HotPoint hotPoint) {
-        hotPoint.setId(IdGenerator.generate());
-        hotPointMapper.addHotPoint(hotPoint);
+    public void addHotPoint(HotPoint hotPoint) throws Exception{
+        Map params = new HashMap();
+        params.put("hotPointName",hotPoint.getHotPointName());
+        int count = hotPointMapper.checkName(params);
+        if(count == 0) {
+            hotPoint.setId(IdGenerator.generate());
+            hotPointMapper.addHotPoint(hotPoint);
+        }else{
+            throw new DuplicateNameException();
+        }
     }
 
     @Override
-    public void updateHotPoint(HotPoint hotPoint) {
+    public void updateHotPoint(HotPoint hotPoint) throws Exception {
         hotPointMapper.updateHotPoint(hotPoint);
     }
 
     @Override
-    public void deleteHotPoint(String hotPointId) {
+    public void deleteHotPoint(String hotPointId) throws Exception {
         Map params = new HashMap();
         params.put("hotPointId",hotPointId);
         hotPointMapper.deleteHotPoint(params);
     }
 
     @Override
-    public HotPoint findHotPointById(String hotPointId, String userId) {
+    public HotPoint findHotPointById(String hotPointId) throws Exception {
         Map params = new HashMap();
         params.put("hotPointId",hotPointId);
-        params.put("userId",userId);
         return hotPointMapper.findHotPointById(params);
     }
 
     @Override
-    public List<HotPoint> findAllHotPointList(String hotPointId) {
+    public List<HotPoint> findAllHotPointList(String hotPointId) throws Exception {
         Map params = new HashMap();
         params.put("hotPointId",hotPointId);
         return hotPointMapper.findAllHotPointList(params);

@@ -95,11 +95,11 @@ public class GoodsMapperBean {
 
 
 
-    private String dataType;
+    private String typeName;
 
-    private String dataName;
+    private String parentTypeId;
 
-    private String baseDataComment;
+    private String typeComment;
 
     private String buildingName;
 
@@ -283,28 +283,28 @@ public class GoodsMapperBean {
         this.hotPointStatus = hotPointStatus;
     }
 
-    public String getDataType() {
-        return dataType;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
-    public String getDataName() {
-        return dataName;
+    public String getParentTypeId() {
+        return parentTypeId;
     }
 
-    public void setDataName(String dataName) {
-        this.dataName = dataName;
+    public void setParentTypeId(String parentTypeId) {
+        this.parentTypeId = parentTypeId;
     }
 
-    public String getBaseDataComment() {
-        return baseDataComment;
+    public String getTypeComment() {
+        return typeComment;
     }
 
-    public void setBaseDataComment(String baseDataComment) {
-        this.baseDataComment = baseDataComment;
+    public void setTypeComment(String typeComment) {
+        this.typeComment = typeComment;
     }
 
     public String getBuildingName() {
