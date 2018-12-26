@@ -21,11 +21,9 @@ public class AccessTokenController {
 
     @RequestMapping(value = "get",method = RequestMethod.POST)
     @ResponseBody
-    public Map get() {
+    public Map get() throws Exception{
     	Map result = new HashMap();
-        AccessToken accessToken = null;
-        try {
-            accessToken = accessTokenService.getAccessToken();
+        AccessToken accessToken = accessTokenService.getAccessToken();
             if(accessToken != null){
                 Utils.tagResult(result,true);
                 result.put("accessToken",accessToken.getAccessToken());
@@ -33,23 +31,14 @@ public class AccessTokenController {
             else {
                 Utils.tagResult(result,false);
             }
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
-
     	return result;
     }
 
     @RequestMapping(value = "update",method = RequestMethod.POST)
     @ResponseBody
-    public Map update() {
+        public Map update() throws Exception{
     	Map result = new HashMap();
-        try {
-            accessTokenService.updateAccessToken();
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        accessTokenService.updateAccessToken();
         return result;
     }
 
