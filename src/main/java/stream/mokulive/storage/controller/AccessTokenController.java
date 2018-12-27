@@ -25,11 +25,10 @@ public class AccessTokenController {
     	Map result = new HashMap();
         AccessToken accessToken = accessTokenService.getAccessToken();
             if(accessToken != null){
-                Utils.tagResult(result,true);
                 result.put("accessToken",accessToken.getAccessToken());
             }
             else {
-                Utils.tagResult(result,false);
+                result.put("accessToken",null);
             }
     	return result;
     }

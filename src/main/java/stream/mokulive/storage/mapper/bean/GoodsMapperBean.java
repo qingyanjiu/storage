@@ -16,7 +16,7 @@ public class GoodsMapperBean {
     /**
      * 物品所有者名称
      */
-    private String owername;
+    private String owerName;
     /**
      * 物品图片
      */
@@ -28,15 +28,15 @@ public class GoodsMapperBean {
     /**
      * 物品类型，一个物品只有一个类型
      */
-    private double typeId;
+    private String typeId;
     /**
-     * 物品标签,一个物品可以有多个标签，tagid用逗号隔开
+     * 物品标签,一个物品可以有多个标签，tag用逗号隔开
      */
-    private double tagId;
+    private String tag;
     /**
      * 热点Id
      */
-    private double hotPointId;
+    private String hotPointId;
     /**
      * 价格
      */
@@ -50,13 +50,17 @@ public class GoodsMapperBean {
      */
     private String modifyTime;
     /**
+     * 丢弃时间
+     */
+    private String throwTime;
+    /**
      * 备注
      */
     private String goodsComment;
     /**
      * 物品状态 (1-有效 0-失效)
      */
-    private String goodsStatus;
+    private String goodStatus;
 
 
 
@@ -131,13 +135,6 @@ public class GoodsMapperBean {
         this.goodsName = goodsName;
     }
 
-    public String getOwername() {
-        return owername;
-    }
-
-    public void setOwername(String owername) {
-        this.owername = owername;
-    }
 
     public String getPicture() {
         return picture;
@@ -155,27 +152,27 @@ public class GoodsMapperBean {
         this.location = location;
     }
 
-    public double getTypeId() {
+    public String getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(double typeId) {
+    public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
 
-    public double getTagId() {
-        return tagId;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTagId(double tagId) {
-        this.tagId = tagId;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
-    public double getHotPointId() {
+    public String getHotPointId() {
         return hotPointId;
     }
 
-    public void setHotPointId(double hotPointId) {
+    public void setHotPointId(String hotPointId) {
         this.hotPointId = hotPointId;
     }
 
@@ -203,6 +200,14 @@ public class GoodsMapperBean {
         this.modifyTime = modifyTime;
     }
 
+    public String getThrowTime() {
+        return throwTime;
+    }
+
+    public void setThrowTime(String throwTime) {
+        this.throwTime = throwTime;
+    }
+
     public String getGoodsComment() {
         return goodsComment;
     }
@@ -211,12 +216,20 @@ public class GoodsMapperBean {
         this.goodsComment = goodsComment;
     }
 
-    public String getGoodsStatus() {
-        return goodsStatus;
+    public String getOwerName() {
+        return owerName;
     }
 
-    public void setGoodsStatus(String goodsStatus) {
-        this.goodsStatus = goodsStatus;
+    public void setOwerName(String owerName) {
+        this.owerName = owerName;
+    }
+
+    public String getGoodStatus() {
+        return goodStatus;
+    }
+
+    public void setGoodStatus(String goodStatus) {
+        this.goodStatus = goodStatus;
     }
 
     public String getBuildingId() {

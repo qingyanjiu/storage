@@ -22,6 +22,7 @@ public class HotPointService implements IHotPointService {
     public void addHotPoint(HotPoint hotPoint) throws Exception{
         Map params = new HashMap();
         params.put("hotPointName",hotPoint.getHotPointName());
+        params.put("userId",hotPoint.getUserId());
         int count = hotPointMapper.checkName(params);
         if(count == 0) {
             hotPoint.setId(IdGenerator.generate());
@@ -51,9 +52,9 @@ public class HotPointService implements IHotPointService {
     }
 
     @Override
-    public List<HotPoint> findAllHotPointList(String hotPointId) throws Exception {
+    public List<HotPoint> findAllHotPointList(String userId) throws Exception {
         Map params = new HashMap();
-        params.put("hotPointId",hotPointId);
+        params.put("userId",userId);
         return hotPointMapper.findAllHotPointList(params);
     }
 }

@@ -1,20 +1,18 @@
 package stream.mokulive.storage.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import stream.mokulive.storage.exception.DuplicateNameException;
 import stream.mokulive.storage.service.IBuildingService;
-import stream.mokulive.storage.utils.Utils;
 import stream.mokulive.storage.vo.Building;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/building")
 @Controller
@@ -25,73 +23,45 @@ public class BuildingController {
 
     @RequestMapping(value="add", method = RequestMethod.POST)
     @ResponseBody
-    public Map add(Building building) {
+    public Map add(Building building) throws Exception {
         Map result = new HashMap();
-        try {
-            buildingService.addBuilding(building);
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-            if(e instanceof DuplicateNameException){
-                result.put("msg","Duplicate name");
-            }
-        }
+        buildingService.addBuilding(building);
         return result;
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
-    public Map update(Building building) {
+    public Map update(Building building) throws Exception {
         Map result = new HashMap();
-        try {
-            buildingService.updateBuilding(building);
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        buildingService.updateBuilding(building);
         return result;
     }
 
     @RequestMapping(value = "delete/{buildingId}", method = RequestMethod.POST)
     @ResponseBody
-    public Map delete(@PathVariable("buildingId") String buildingId) {
+    public Map delete(@PathVariable("buildingId") String buildingId) throws Exception {
         Map result = new HashMap();
-        try {
-            buildingService.deleteBuilding(buildingId);
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        buildingService.deleteBuilding(buildingId);
         return result;
     }
 
     @RequestMapping(value = "{buildingId}",method = RequestMethod.POST)
     @ResponseBody
-    public Map findById(@PathVariable("buildingId") String buildingId) {
+    public Map findById(@PathVariable("buildingId") String buildingId) throws Exception {
     	Map result = new HashMap();
-    	Building building = new Building();
-        try {
-            building = buildingService.findBuildingById(buildingId);
-            Utils.tagResult(result,true);
-            result.put("building",building);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+    	Building building = null;
+        building = buildingService.findBuildingById(buildingId);
+        result.put("building",building);
         return result;
     }
 
     @RequestMapping(value = "list",method = RequestMethod.POST)
     @ResponseBody
-    public Map findBuildingList(String userId) {
+    public Map findBuildingList(String userId) throws Exception {
     	Map result = new HashMap();
     	List<Building> buildingList = new ArrayList();
-        try {
-            buildingList = buildingService.findBuildingList(userId);
-            Utils.tagResult(result,true);
-            result.put("buildingList",buildingList);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        buildingList = buildingService.findBuildingList(userId);
+        result.put("buildingList",buildingList);
         return result;
     }
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import stream.mokulive.storage.exception.DuplicateNameException;
 import stream.mokulive.storage.mapper.GoodsMapper;
+import stream.mokulive.storage.mapper.bean.GoodsMapperBean;
 import stream.mokulive.storage.service.IGoodsService;
 import stream.mokulive.storage.utils.IdGenerator;
 import stream.mokulive.storage.vo.Goods;
@@ -22,6 +23,7 @@ public class GoodsService implements IGoodsService {
     public void addGoods(Goods goods) throws Exception {
         Map params = new HashMap();
         params.put("goodsName",goods.getGoodsName());
+        params.put("userId",goods.getUserId());
         int count = goodsMapper.checkName(params);
         if(count == 0) {
             goods.setGoodsId(IdGenerator.generate());
@@ -44,7 +46,7 @@ public class GoodsService implements IGoodsService {
     }
 
     @Override
-    public List<Goods> findGoodsListByName(String goodsName, String userId) throws Exception {
+    public List<GoodsMapperBean> findGoodsListByName(String goodsName, String userId) throws Exception {
         Map params = new HashMap();
         params.put("goodsName",goodsName);
         params.put("userId",userId);
@@ -52,21 +54,21 @@ public class GoodsService implements IGoodsService {
     }
 
     @Override
-    public Goods findGoodsById(String goodsId) throws Exception {
+    public GoodsMapperBean findGoodsById(String goodsId) throws Exception {
         Map params = new HashMap();
         params.put("goodsId",goodsId);
         return goodsMapper.findGoodsById(params);
     }
 
     @Override
-    public List<Goods> findAllGoodsList(String userId) throws Exception {
+    public List<GoodsMapperBean> findAllGoodsList(String userId) throws Exception {
         Map params = new HashMap();
         params.put("userId",userId);
         return goodsMapper.findAllGoodsList(params);
     }
 
     @Override
-    public List<Goods> findGoodsListUnrelatedToHotPoint(String userId) throws Exception {
+    public List<GoodsMapperBean> findGoodsListUnrelatedToHotPoint(String userId) throws Exception {
         Map params = new HashMap();
         params.put("userId",userId);
         return goodsMapper.findGoodsListUnrelatedToHotPoint(params);

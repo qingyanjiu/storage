@@ -1,6 +1,7 @@
 package stream.mokulive.storage.mapper;
 
 import org.springframework.stereotype.Repository;
+import stream.mokulive.storage.mapper.bean.GoodsMapperBean;
 import stream.mokulive.storage.vo.Goods;
 
 import java.util.List;
@@ -17,12 +18,12 @@ public interface GoodsMapper {
 
     void deleteGoods(Map params);
 
-    List<Goods> findGoodsListByName(Map params);
+    List<GoodsMapperBean> findGoodsListByName(Map params);
 
-    Goods findGoodsById(Map params);
+    GoodsMapperBean findGoodsById(Map params);
 
-    List<Goods> findAllGoodsList(Map params);
+    List<GoodsMapperBean> findAllGoodsList(Map params);
 
-    List<Goods> findGoodsListUnrelatedToHotPoint(Map params);
+    List<GoodsMapperBean> findGoodsListUnrelatedToHotPoint(Map params);
 
 }

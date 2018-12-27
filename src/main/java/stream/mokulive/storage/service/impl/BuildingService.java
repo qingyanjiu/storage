@@ -23,6 +23,7 @@ public class BuildingService implements IBuildingService {
     public void addBuilding(Building building) throws Exception {
         Map params = new HashMap();
         params.put("buildingName",building.getBuildingName());
+        params.put("userId",building.getUserId());
         int count = buildingMapper.checkName(params);
         if(count == 0) {
             building.setBuildingId(IdGenerator.generate());

@@ -17,9 +17,15 @@
 
     <update id="updateType" parameterType="stream.mokulive.storage.vo.Type">
         update storage_type set
+          <if test="typeName !=null and typeName != ''">
           typename=#{typeName},
+          </if>
+          <if test="parentTypeId !=null and parentTypeId != ''">
           parenttypeid=#{parentTypeId},
+          </if>
+          <if test="typeComment !=null and typeComment != ''">
           typecomment=#{typeComment}
+          </if>
         WHERE
           typeid=#{typeId}
     </update>

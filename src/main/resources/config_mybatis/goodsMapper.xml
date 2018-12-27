@@ -13,12 +13,12 @@
                 goodsid,
                 userid,
                 owername,
-                goodname,
+                goodsname,
                 picture,
                 location,
                 hotpointid,
                 typeid,
-                tagid,
+                tag,
                 buytime,
                 price,
                 modifytime,
@@ -27,14 +27,14 @@
             )
             values (
                 #{goodsId},
-                #{userid},
-                #{owername},
+                #{userId},
+                #{owerName},
                 #{goodsName},
                 #{picture},
                 #{location},
                 #{hotPointId},
                 #{typeId},
-                #{tagId},
+                #{tag},
                 #{buyTime},
                 #{price},
                 now(),
@@ -45,25 +45,46 @@
 
     <update id="updateGoods" parameterType="stream.mokulive.storage.vo.Goods">
         update storage_goods set
-                goodname=#{goodsName},
-                userid=#{userId},
-                owername=#{owername},
+                <if test="goodsName !=null and goodsName != ''">
+                goodsname=#{goodsName},
+                </if>
+                <if test="owerName !=null and owerName != ''">
+                owername=#{owerName},
+                </if>
+                <if test="picture !=null and picture != ''">
                 picture=#{picture},
+                </if>
+                <if test="location !=null and location != ''">
                 location=#{location},
+                </if>
+                <if test="hotPointId !=null and hotPointId != ''">
                 hotpointid=#{hotPointId},
+                </if>
+                <if test="typeId !=null and typeId != ''">
                 typeid=#{typeId},
-                tagid=#{tagId},
+                </if>
+                <if test="tag !=null and tag != ''">
+                tag=#{tag},
+                </if>
+                <if test="buyTime !=null and buyTime != ''">
                 buytime=#{buyTime},
+                </if>
+                <if test="price !=null and price != ''">
                 price=#{price},
+                </if>
                 modifytime=now(),
+                <if test="comment !=null and comment != ''">
                 comment=#{comment},
+                </if>
+                <if test="status !=null and status != ''">
                 status=#{status}
+                </if>
             where goodsid = #{goodsId}
     </update>
 
     <update id="deleteGoods" parameterType="hashmap">
         update storage_goods
-        set status='0'
+        set status='0', throwtime=now()
         where goodsid = #{goodsId}
     </update>
 
@@ -81,36 +102,10 @@
 
     <select id="findAllGoodsList" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean" fetchSize="1000">
         select
---             goodsid,
---             userid,
---             goodname,
---             owername,
---             picture,
---             location,
---             hotpointid,
---             typeid,
---             tagid,
---             buytime,
---             price,
---             modifytime,
---             goodscomment,
---             goodstatus,
---             xstart,
---             ystart,
---             xend,
---             yend,
---             hotPointName,
---             hotpointcomment,
---             hotpointstatus,
---             datatype,
---             dataname,
---             basedatacomment
               *
         from storage_view_goods
-        where
-        and goodstatus='1'
-        and hotpointstatus='1'
-        and userid=#{userid}
+        where goodstatus='1'
+        and userid=#{userId}
     </select>
 
     <select id="findGoodsListUnrelatedToHotPoint" parameterType="hashmap" resultType="stream.mokulive.storage.mapper.bean.GoodsMapperBean" fetchSize="1000">

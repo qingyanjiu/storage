@@ -3,13 +3,13 @@
 <mapper namespace="stream.mokulive.storage.mapper.HotPointMapper">
 
     <select id="checkName" parameterType="hashmap" resultType="int">
-        select count(1) from storage_hot_point
+        select count(1) from storage_hot_points
         where hotpointname=#{hotPointName}
         and userid=#{userId}
     </select>
 
     <insert id="addHotPoint" parameterType="stream.mokulive.storage.vo.HotPoint">
-        insert into storage_hot_point values (
+        insert into storage_hot_points values (
             #{id},
             #{userId},
             #{buildingId},
@@ -24,35 +24,48 @@
     </insert>
 
     <update id="updateHotPoint" parameterType="stream.mokulive.storage.vo.HotPoint">
-        update storage_hot_point set
-            userid=#{userId},
+        update storage_hot_points set
+            <if test="buildingId !=null and buildingId != ''">
             buildingid=#{buildingId},
+            </if>
+            <if test="xstart !=null and xstart != ''">
             xstart=#{xstart},
+            </if>
+            <if test="ystart !=null and ystart != ''">
             ystart=#{ystart},
+            </if>
+            <if test="xend !=null and xend != ''">
             xend=#{xend},
+            </if>
+            <if test="yend !=null and yend != ''">
             yend=#{yend},
+            </if>
+            <if test="hotPointName !=null and hotPointName != ''">
             hotpointname=#{hotPointName},
+            </if>
+            <if test="comment !=null and comment != ''">
             comment=#{comment},
+            </if>
+            <if test="status !=null and status != ''">
             status=#{status}
+            </if>
             WHERE
             id=#{id}
     </update>
 
-    <update id="deleteHotPoint" parameterType="hashmap">
-        update storage_hot_point
-          SET status='0'
-          WHERE
-          id=#{id}
-    </update>
+    <delete id="deleteHotPoint" parameterType="hashmap">
+        delete from storage_hot_points
+          WHERE id=#{hotPointId}
+    </delete>
 
     <select id="findHotPointById" parameterType="hashmap" resultType="stream.mokulive.storage.vo.HotPoint">
-        select * from storage_hot_point
+        select * from storage_hot_points
           WHERE
           id=#{hotPointId}
     </select>
 
     <select id="findAllHotPointList" parameterType="hashmap" resultType="stream.mokulive.storage.vo.HotPoint" fetchSize="1000">
-        select * from storage_hot_point
+        select * from storage_hot_points
           WHERE
           userid=#{userId}
           and status='1'

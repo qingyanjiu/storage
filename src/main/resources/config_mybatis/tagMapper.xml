@@ -16,8 +16,12 @@
 
     <update id="updateTag" parameterType="stream.mokulive.storage.vo.Tag">
         update storage_tag set
+          <if test="tagName !=null and tagName != ''">
           tagName=#{tagName},
+          </if>
+          <if test="tagComment !=null and tagComment != ''">
           tagComment=#{tagComment}
+          </if>
         WHERE
           tagId=#{tagId}
     </update>

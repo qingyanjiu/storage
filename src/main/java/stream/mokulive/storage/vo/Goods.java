@@ -20,7 +20,7 @@ public class Goods {
     /**
      * 物品所有者名称
      */
-    private String owername;
+    private String owerName;
     /**
      * 物品图片
      */
@@ -32,15 +32,15 @@ public class Goods {
     /**
      * 物品类型，一个物品只有一个类型
      */
-    private double typeId;
+    private String typeId;
     /**
      * 物品标签,一个物品可以有多个标签，tagid用逗号隔开
      */
-    private double tagId;
+    private String tag;
     /**
      * 热点Id
      */
-    private double hotPointId;
+    private String hotPointId;
     /**
      * 价格
      */
@@ -53,6 +53,10 @@ public class Goods {
      * 最近修改时间
      */
     private String modifyTime;
+    /**
+     * 丢弃时间
+     */
+    private String throwTime;
     /**
      * 备注
      */
@@ -78,20 +82,20 @@ public class Goods {
         this.userId = userId;
     }
 
-    public String getOwername() {
-        return owername;
-    }
-
-    public void setOwername(String owername) {
-        this.owername = owername;
-    }
-
     public String getGoodsName() {
         return goodsName;
     }
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName;
+    }
+
+    public String getOwerName() {
+        return owerName;
+    }
+
+    public void setOwerName(String owerName) {
+        this.owerName = owerName;
     }
 
     public String getPicture() {
@@ -110,20 +114,28 @@ public class Goods {
         this.location = location;
     }
 
-    public double getTypeId() {
+    public String getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(double typeId) {
+    public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
 
-    public double getTagId() {
-        return tagId;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTagId(double tagId) {
-        this.tagId = tagId;
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getHotPointId() {
+        return hotPointId;
+    }
+
+    public void setHotPointId(String hotPointId) {
+        this.hotPointId = hotPointId;
     }
 
     public double getPrice() {
@@ -150,6 +162,14 @@ public class Goods {
         this.modifyTime = modifyTime;
     }
 
+    public String getThrowTime() {
+        return throwTime;
+    }
+
+    public void setThrowTime(String throwTime) {
+        this.throwTime = throwTime;
+    }
+
     public String getComment() {
         return comment;
     }
@@ -164,13 +184,5 @@ public class Goods {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public double getHotPointId() {
-        return hotPointId;
-    }
-
-    public void setHotPointId(double hotPointId) {
-        this.hotPointId = hotPointId;
     }
 }

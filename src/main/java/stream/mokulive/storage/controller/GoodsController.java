@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import stream.mokulive.storage.exception.DuplicateNameException;
+import stream.mokulive.storage.mapper.bean.GoodsMapperBean;
 import stream.mokulive.storage.service.IGoodsService;
-import stream.mokulive.storage.utils.Utils;
 import stream.mokulive.storage.vo.Goods;
 
 import java.util.ArrayList;
@@ -25,106 +24,65 @@ public class GoodsController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public Map add(Goods goods) {
+    public Map add(Goods goods) throws Exception {
         Map result = new HashMap();
-        try {
-            goodsService.addGoods(goods);
-            Utils.tagResult(result, true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-            if(e instanceof DuplicateNameException){
-                result.put("msg","Duplicate name");
-            }
-        }
+        goodsService.addGoods(goods);
         return result;
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
-    public Map update(Goods goods) {
+    public Map update(Goods goods) throws Exception {
         Map result = new HashMap();
-        try {
-            goodsService.updateGoods(goods);
-            Utils.tagResult(result, true);
-        } catch (Exception e) {
-            Utils.tagResult(result, false);
-        }
+        goodsService.updateGoods(goods);
         return result;
     }
 
     @RequestMapping(value = "delete/{goodsId}", method = RequestMethod.POST)
     @ResponseBody
-    public Map delete(@PathVariable("goodsId") String goodsId) {
+    public Map delete(@PathVariable("goodsId") String goodsId) throws Exception {
         Map result = new HashMap();
-        try {
-            goodsService.deleteGoods(goodsId);
-            Utils.tagResult(result, true);
-        } catch (Exception e) {
-            Utils.tagResult(result, false);
-        }
+        goodsService.deleteGoods(goodsId);
         return result;
     }
 
     @RequestMapping(value = "findByName", method = RequestMethod.POST)
     @ResponseBody
-    public Map findByName(String goodsName, String userId) {
+    public Map findByName(String goodsName, String userId) throws Exception {
         Map result = new HashMap();
-        List<Goods> goodsList = new ArrayList();
-        try {
-            goodsList = goodsService.findGoodsListByName(goodsName, userId);
-            result.put("goodsList", goodsList);
-            Utils.tagResult(result, true);
-        } catch (Exception e) {
-            Utils.tagResult(result, false);
-        }
+        List<GoodsMapperBean> goodsList = new ArrayList();
+        goodsList = goodsService.findGoodsListByName(goodsName, userId);
+        result.put("goodsList", goodsList);
         return result;
     }
 
     @RequestMapping(value = "{goodsId}", method = RequestMethod.POST)
     @ResponseBody
-    public Map findById(@PathVariable("goodsId") String goodsId) {
+    public Map findById(@PathVariable("goodsId") String goodsId) throws Exception {
         Map result = new HashMap();
-        Goods goods = new Goods();
-        try {
-            goods = goodsService.findGoodsById(goodsId);
-            result.put("goods", goods);
-            Utils.tagResult(result, true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-            if(e.getClass().isInstance(DuplicateNameException.class)){
-                result.put("msg","Duplicate name");
-            }
-        }
+        GoodsMapperBean goods = null;
+        goods = goodsService.findGoodsById(goodsId);
+        result.put("goods", goods);
         return result;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
-    public Map findAll(String userId) {
+    public Map findAll(String userId) throws Exception {
         Map result = new HashMap();
-        List<Goods> goodsList = new ArrayList();
-        try {
-            goodsList = goodsService.findAllGoodsList(userId);
-            result.put("goodsList", goodsList);
-            Utils.tagResult(result, true);
-        } catch (Exception e) {
-            Utils.tagResult(result, false);
-        }
+        List<GoodsMapperBean> goodsList = new ArrayList();
+        goodsList = goodsService.findAllGoodsList(userId);
+        result.put("goodsList", goodsList);
         return result;
     }
 
     @RequestMapping(value = "findUnrelated", method = RequestMethod.POST)
     @ResponseBody
-    public Map findGoodsListUnrelatedToHotPoint(String userId) {
+    public Map findGoodsListUnrelatedToHotPoint(String userId) throws Exception {
         Map result = new HashMap();
-        List<Goods> goodsList = new ArrayList();
-        try {
-            goodsList = goodsService.findGoodsListUnrelatedToHotPoint(userId);
-            result.put("goodsList", goodsList);
-            Utils.tagResult(result, true);
-        } catch (Exception e) {
-            Utils.tagResult(result, false);
-        }
+        List<GoodsMapperBean> goodsList = new ArrayList();
+        goodsList = goodsService.findGoodsListUnrelatedToHotPoint(userId);
+        result.put("goodsList", goodsList);
         return result;
     }
 

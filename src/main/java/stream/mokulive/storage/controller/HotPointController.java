@@ -26,73 +26,45 @@ public class HotPointController {
 
     @RequestMapping(value="add", method = RequestMethod.POST)
     @ResponseBody
-    public Map add(HotPoint hotPoint) {
+    public Map add(HotPoint hotPoint) throws Exception {
         Map result = new HashMap();
-        try {
-            hotPointService.addHotPoint(hotPoint);
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-            if(e instanceof DuplicateNameException){
-                result.put("msg","Duplicate name");
-            }
-        }
+        hotPointService.addHotPoint(hotPoint);
         return result;
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
-    public Map update(HotPoint hotPoint) {
+    public Map update(HotPoint hotPoint) throws Exception {
         Map result = new HashMap();
-        try {
-            hotPointService.updateHotPoint(hotPoint);
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        hotPointService.updateHotPoint(hotPoint);
         return result;
     }
 
     @RequestMapping(value = "delete/{hotPointId}", method = RequestMethod.POST)
     @ResponseBody
-    public Map delete(@PathVariable("hotPointId") String hotPointId) {
+    public Map delete(@PathVariable("hotPointId") String hotPointId) throws Exception {
         Map result = new HashMap();
-        try {
-            hotPointService.deleteHotPoint(hotPointId);
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        hotPointService.deleteHotPoint(hotPointId);
         return result;
     }
 
     @RequestMapping(value = "{hotPointId}",method = RequestMethod.POST)
     @ResponseBody
-    public Map findById(@PathVariable("hotPointId") String hotPointId) {
+    public Map findById(@PathVariable("hotPointId") String hotPointId) throws Exception {
         Map result = new HashMap();
-        HotPoint hotPoint = new HotPoint();
-        try {
-            hotPoint = hotPointService.findHotPointById(hotPointId);
-            Utils.tagResult(result,true);
-            result.put("hotPoint",hotPoint);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        HotPoint hotPoint = null;
+        hotPoint = hotPointService.findHotPointById(hotPointId);
+        result.put("hotPoint",hotPoint);
         return result;
     }
 
     @RequestMapping(value = "list",method = RequestMethod.POST)
     @ResponseBody
-    public Map findList(String userId) {
+    public Map findList(String userId) throws Exception {
         Map result = new HashMap();
         List<HotPoint> hotPointList = new ArrayList();
-        try {
-            hotPointList = hotPointService.findAllHotPointList(userId);
-            Utils.tagResult(result,true);
-            result.put("hotPointList",hotPointList);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        hotPointList = hotPointService.findAllHotPointList(userId);
+        result.put("hotPointList",hotPointList);
         return result;
     }
 

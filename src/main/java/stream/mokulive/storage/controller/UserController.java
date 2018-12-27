@@ -24,32 +24,19 @@ public class UserController {
 
     @RequestMapping(value = "{userId}",method = RequestMethod.POST)
     @ResponseBody
-    public Map checkUser(@PathVariable("userId") String userId) {
+    public Map checkUser(@PathVariable("userId") String userId) throws Exception {
     	Map result = new HashMap();
         Auth0User user = null;
-        try {
-            user = userService.checkUser(userId);
-            if(user != null){
-                result.put("user",user);
-            }
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
-
+        user = userService.checkUser(userId);
+        result.put("user", user);
     	return result;
     }
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
-    public Map add(Auth0User user) {
+    public Map add(Auth0User user) throws Exception {
     	Map result = new HashMap();
-        try {
-            userService.addUser(user);
-            Utils.tagResult(result,true);
-        } catch (Exception e) {
-            Utils.tagResult(result,false);
-        }
+        userService.addUser(user);
         return result;
     }
 

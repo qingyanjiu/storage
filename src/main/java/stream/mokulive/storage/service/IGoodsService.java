@@ -1,6 +1,7 @@
 package stream.mokulive.storage.service;
 
 import stream.mokulive.storage.exception.DuplicateNameException;
+import stream.mokulive.storage.mapper.bean.GoodsMapperBean;
 import stream.mokulive.storage.vo.Goods;
 
 import java.util.List;
@@ -13,11 +14,11 @@ public interface IGoodsService {
 
     void deleteGoods(String goodsId) throws Exception;
 
-    List<Goods> findGoodsListByName(String goodsName, String userId) throws Exception;
+    List<GoodsMapperBean> findGoodsListByName(String goodsName, String userId) throws Exception;
 
-    Goods findGoodsById(String goodsId) throws Exception;
+    GoodsMapperBean findGoodsById(String goodsId) throws Exception;
 
-    List<Goods> findAllGoodsList(String userId) throws Exception;
+    List<GoodsMapperBean> findAllGoodsList(String userId) throws Exception;
 
-    List<Goods> findGoodsListUnrelatedToHotPoint(String userId) throws Exception;
+    List<GoodsMapperBean> findGoodsListUnrelatedToHotPoint(String userId) throws Exception;
 }
