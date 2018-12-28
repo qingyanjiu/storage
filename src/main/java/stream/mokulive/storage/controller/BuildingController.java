@@ -2,10 +2,7 @@ package stream.mokulive.storage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import stream.mokulive.storage.service.IBuildingService;
 import stream.mokulive.storage.vo.Building;
 
@@ -23,7 +20,7 @@ public class BuildingController {
 
     @RequestMapping(value="add", method = RequestMethod.POST)
     @ResponseBody
-    public Map add(Building building) throws Exception {
+    public Map add(@RequestBody Building building) throws Exception {
         Map result = new HashMap();
         buildingService.addBuilding(building);
         return result;
@@ -31,7 +28,7 @@ public class BuildingController {
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
-    public Map update(Building building) throws Exception {
+    public Map update(@RequestBody Building building) throws Exception {
         Map result = new HashMap();
         buildingService.updateBuilding(building);
         return result;

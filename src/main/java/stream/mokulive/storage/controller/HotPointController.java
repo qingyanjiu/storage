@@ -2,10 +2,7 @@ package stream.mokulive.storage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import stream.mokulive.storage.exception.DuplicateNameException;
 import stream.mokulive.storage.service.IHotPointService;
 import stream.mokulive.storage.utils.Utils;
@@ -26,7 +23,7 @@ public class HotPointController {
 
     @RequestMapping(value="add", method = RequestMethod.POST)
     @ResponseBody
-    public Map add(HotPoint hotPoint) throws Exception {
+    public Map add(@RequestBody HotPoint hotPoint) throws Exception {
         Map result = new HashMap();
         hotPointService.addHotPoint(hotPoint);
         return result;
@@ -34,7 +31,7 @@ public class HotPointController {
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
-    public Map update(HotPoint hotPoint) throws Exception {
+    public Map update(@RequestBody HotPoint hotPoint) throws Exception {
         Map result = new HashMap();
         hotPointService.updateHotPoint(hotPoint);
         return result;

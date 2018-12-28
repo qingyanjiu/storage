@@ -2,10 +2,7 @@ package stream.mokulive.storage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import stream.mokulive.storage.service.IAccessTokenService;
 import stream.mokulive.storage.service.IUserService;
 import stream.mokulive.storage.utils.Utils;
@@ -34,7 +31,7 @@ public class UserController {
 
     @RequestMapping(value = "add",method = RequestMethod.POST)
     @ResponseBody
-    public Map add(Auth0User user) throws Exception {
+    public Map add(@RequestBody Auth0User user) throws Exception {
     	Map result = new HashMap();
         userService.addUser(user);
         return result;

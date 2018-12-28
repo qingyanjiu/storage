@@ -2,10 +2,7 @@ package stream.mokulive.storage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import stream.mokulive.storage.mapper.bean.GoodsMapperBean;
 import stream.mokulive.storage.service.IGoodsService;
 import stream.mokulive.storage.vo.Goods;
@@ -24,7 +21,7 @@ public class GoodsController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public Map add(Goods goods) throws Exception {
+    public Map add(@RequestBody Goods goods) throws Exception {
         Map result = new HashMap();
         goodsService.addGoods(goods);
         return result;
@@ -32,7 +29,7 @@ public class GoodsController {
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
-    public Map update(Goods goods) throws Exception {
+    public Map update(@RequestBody Goods goods) throws Exception {
         Map result = new HashMap();
         goodsService.updateGoods(goods);
         return result;

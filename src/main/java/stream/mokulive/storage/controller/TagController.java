@@ -2,10 +2,7 @@ package stream.mokulive.storage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import stream.mokulive.storage.service.ITagService;
 import stream.mokulive.storage.vo.Tag;
 
@@ -23,7 +20,7 @@ public class TagController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public Map add(Tag tag) throws Exception{
+    public Map add(@RequestBody Tag tag) throws Exception{
     	Map result = new HashMap();
         tagService.addTag(tag);
         return result;
@@ -31,7 +28,7 @@ public class TagController {
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
     @ResponseBody
-    public Map update(Tag tag) throws Exception{
+    public Map update(@RequestBody Tag tag) throws Exception{
     	Map result = new HashMap();
         tagService.updateTag(tag);
         return result;
