@@ -126,10 +126,10 @@ alter table storage_building
 /*==============================================================*/
 create table storage_user
 (
-  userid varchar(20) not null,
-  nick   varchar(20) not null comment '用户名',
-  avatar varchar(100) not null comment '头像',
-  email  varchar(30) comment '邮箱',
+  userid varchar(50) not null,
+  nick   varchar(50) not null comment '用户名',
+  avatar varchar(200) not null comment '头像',
+  email  varchar(50) comment '邮箱',
   primary key (userid)
 );
 
