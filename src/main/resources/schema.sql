@@ -66,7 +66,7 @@ create table storage_goods
   userid     varchar(50) not null comment '用户id',
   goodname   varchar(40) not null comment '物品名称',
   owername   varchar(50) comment '所有者名字',
-  picture    varchar(100) comment '物品图片',
+  picture    varchar(200) comment '物品图片',
   hotpointid varchar(50) comment '热点id',
   location   varchar(100) comment '物品收纳位置',
   typeid     varchar(50) not null comment '物品类型',
@@ -112,7 +112,7 @@ create table storage_building
   buildingid varchar(50) not null comment 'id',
   userid varchar(50) not null comment '用户id',
   buildingname   varchar(50) not null comment '建筑物名字',
-  planpicture varchar(100) not null comment '平面图url',
+  planpicture varchar(200) not null comment '平面图url',
   comment  varchar(100) comment '描述',
   status  varchar(10) comment '状态',
   primary key (buildingid)
