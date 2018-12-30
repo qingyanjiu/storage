@@ -63,7 +63,7 @@ public class GoodsController {
         return result;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public Map findAll(String userId) throws Exception {
         Map result = new HashMap();
