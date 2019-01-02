@@ -14,6 +14,8 @@ public interface IGoodsService {
 
     void deleteGoods(String goodsId) throws Exception;
 
+    void deleteGoodsList(List<String> goodsIdList) throws Exception;
+
     List<GoodsMapperBean> findGoodsListByName(String goodsName, String userId) throws Exception;
 
     GoodsMapperBean findGoodsById(String goodsId) throws Exception;

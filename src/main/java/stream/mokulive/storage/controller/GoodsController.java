@@ -43,6 +43,14 @@ public class GoodsController {
         return result;
     }
 
+    @RequestMapping(value = "deleteGoodsList", method = RequestMethod.POST)
+    @ResponseBody
+    public Map deleteGoodsList(@RequestBody List<String> goodsIdList) throws Exception {
+        Map result = new HashMap();
+        goodsService.deleteGoodsList(goodsIdList);
+        return result;
+    }
+
     @RequestMapping(value = "findByName", method = RequestMethod.POST)
     @ResponseBody
     public Map findByName(String goodsName, String userId) throws Exception {

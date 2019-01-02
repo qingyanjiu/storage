@@ -2,6 +2,7 @@ package stream.mokulive.storage.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import stream.mokulive.storage.exception.DuplicateNameException;
 import stream.mokulive.storage.mapper.GoodsMapper;
 import stream.mokulive.storage.mapper.bean.GoodsMapperBean;
@@ -21,16 +22,16 @@ public class GoodsService implements IGoodsService {
 
     @Override
     public void addGoods(Goods goods) throws Exception {
-        Map params = new HashMap();
-        params.put("goodsName",goods.getGoodsName());
-        params.put("userId",goods.getUserId());
-        int count = goodsMapper.checkName(params);
-        if(count == 0) {
+//        Map params = new HashMap();
+//        params.put("goodsName",goods.getGoodsName());
+//        params.put("userId",goods.getUserId());
+//        int count = goodsMapper.checkName(params);
+//        if(count == 0) {
             goods.setGoodsId(IdGenerator.generate());
             goodsMapper.addGoods(goods);
-        }else{
-            throw new DuplicateNameException();
-        }
+//        }else{
+//            throw new DuplicateNameException();
+//        }
     }
 
     @Override
@@ -43,6 +44,17 @@ public class GoodsService implements IGoodsService {
         Map params = new HashMap();
         params.put("goodsId",goodsId);
         goodsMapper.deleteGoods(params);
+    }
+
+    @Transactional
+    @Override
+    public void deleteGoodsList(List<String> goodsIdList) throws Exception {
+        Map map = new HashMap();
+        for (String goodsId:goodsIdList) {
+            map.clear();
+            map.put("goodsId",goodsId);
+            goodsMapper.deleteGoods(map);
+        }
     }
 
     @Override
