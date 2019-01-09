@@ -37,11 +37,11 @@
           buildingId=#{buildingId}
     </update>
 
-    <delete id="deleteBuilding" parameterType="hashmap">
-        delete from storage_building
-        WHERE
-          buildingId=#{buildingId}
-    </delete>
+    <update id="deleteBuilding" parameterType="hashmap">
+        update storage_building
+        set status='0'
+        where buildingId=#{buildingId}
+    </update>
 
     <select id="findBuildingList" parameterType="hashmap" resultType="stream.mokulive.storage.vo.Building" fetchSize="1000">
         select * from storage_building
