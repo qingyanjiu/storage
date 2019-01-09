@@ -46,7 +46,7 @@
     <select id="findBuildingList" parameterType="hashmap" resultType="stream.mokulive.storage.vo.Building" fetchSize="1000">
         select * from storage_building
         WHERE
-        1=1
+        status='1'
         <if test="buildingId !=null and buildingId != ''">
             and buildingId=#{buildingId}
         </if>
