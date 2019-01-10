@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: storage-backend
+  labels:
+    app: backend
+    env: dev
+spec:
+  selector:
+    matchLabels:
+      app: backend
+      env: dev
+  replicas: 1
+  template:
+    metadata:
+      name: storage-backend
+      labels:
+        app: backend
+        env: dev
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: storage-backend
+        image: daocloud.io/alaien/storage
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        command: ["java","-jar","-Dspring.profiles.active=dev","storage-backend.jar"]
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: storage-backend
+  labels:
+    app: backend
+    env: dev
+spec:
+  selector:
+    app: backend
+    env: dev
+  type: NodePort
+  ports:
+  - port: 8000
+    nodePort: 30001
+    targetPort: 8000
