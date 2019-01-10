@@ -64,9 +64,9 @@ public class BuildingController {
 
     @RequestMapping(value = "deleteBuildingList",method = RequestMethod.POST)
     @ResponseBody
-    public Map deleteBuildingList(List<String> buildingList) throws Exception {
+    public Map deleteBuildingList(@RequestBody List<String> buildingIdList) throws Exception {
     	Map result = new HashMap();
-        buildingService.deleteBuildingList(buildingList);
+        buildingService.deleteBuildingList(buildingIdList);
         return result;
     }
 
