@@ -15,4 +15,6 @@ public interface IBuildingService {
     Building findBuildingById(String buildingId) throws Exception;
 
     List<Building> findBuildingList(String userId) throws Exception;
+
+    void deleteBuildingList(List<String> buildingIdList) throws Exception;
 }

@@ -2,6 +2,7 @@ package stream.mokulive.storage.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import stream.mokulive.storage.exception.DuplicateNameException;
 import stream.mokulive.storage.mapper.BuildingMapper;
 import stream.mokulive.storage.service.IBuildingService;
@@ -63,5 +64,13 @@ public class BuildingService implements IBuildingService {
         Map params = new HashMap();
         params.put("userId",userId);
         return buildingMapper.findBuildingList(params);
+    }
+
+    @Transactional
+    @Override
+    public void deleteBuildingList(List<String> buildingIdList) throws Exception {
+        for(String buildingId : buildingIdList) {
+            deleteBuilding(buildingId);
+        }
     }
 }
