@@ -14,6 +14,6 @@ public interface IHotPointService {
 
     HotPoint findHotPointById(String hotPointId) throws Exception;
 
-    List<HotPoint> findAllHotPointList(String userId) throws Exception;
+    List<HotPoint> findAllHotPointList(String userId,String buildingId) throws Exception;
 
 }

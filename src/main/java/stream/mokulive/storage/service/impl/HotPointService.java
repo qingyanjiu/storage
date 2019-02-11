@@ -52,9 +52,10 @@ public class HotPointService implements IHotPointService {
     }
 
     @Override
-    public List<HotPoint> findAllHotPointList(String userId) throws Exception {
+    public List<HotPoint> findAllHotPointList(String userId, String buildingId) throws Exception {
         Map params = new HashMap();
         params.put("userId",userId);
+        params.put("buildingId",buildingId);
         return hotPointMapper.findAllHotPointList(params);
     }
 }

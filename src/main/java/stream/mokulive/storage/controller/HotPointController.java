@@ -57,10 +57,10 @@ public class HotPointController {
 
     @RequestMapping(value = "list",method = RequestMethod.POST)
     @ResponseBody
-    public Map findList(String userId) throws Exception {
+    public Map findList(String userId, String buildingId) throws Exception {
         Map result = new HashMap();
         List<HotPoint> hotPointList = new ArrayList();
-        hotPointList = hotPointService.findAllHotPointList(userId);
+        hotPointList = hotPointService.findAllHotPointList(userId,buildingId);
         result.put("hotPointList",hotPointList);
         return result;
     }

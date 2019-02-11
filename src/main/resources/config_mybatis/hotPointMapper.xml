@@ -68,6 +68,7 @@
         select * from storage_hot_points
           WHERE
           userid=#{userId}
+          and buildingid=#{buildingId}
           and status='1'
     </select>
 
