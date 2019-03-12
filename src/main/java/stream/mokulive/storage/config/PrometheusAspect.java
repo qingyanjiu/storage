@@ -1,5 +1,7 @@
 package stream.mokulive.storage.config;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,8 +23,11 @@ import java.util.Map;
 public class PrometheusAspect{
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private Counter totalCount;
+    private Counter errorCount;
+
     @Autowired
-    private AccessCountMetrics metrics;
+    private MeterRegistry meterRegistry;
 
     @Pointcut("execution(* stream.mokulive.storage..*Controller.*(..))")
     public void prometheusMonitor(){}
@@ -33,8 +38,14 @@ public class PrometheusAspect{
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes()).getRequest();
         String url = request.getRequestURI();
+
+        totalCount = Counter.builder("access_count").tags(new String[]{"type","api","url",url})
+                .description("total request counter of api").register(meterRegistry);
+        errorCount = Counter.builder("error_count").tags(new String[]{"type","api","url",url})
+                .description("response Error counter of api").register(meterRegistry);
+
         //prometheus访问计数器+1
-        metrics.totalCount.increment();
+        totalCount.increment();
         try {
             result = (Map) proceedingJoinPoint.proceed();
             Utils.tagResult(result,true);
@@ -42,7 +53,7 @@ public class PrometheusAspect{
             logger.error("promethues捕捉到请求出错 : " + proceedingJoinPoint.getTarget().getClass().getName()
                     + "." + proceedingJoinPoint.getSignature().getName());
             //prometheus错误计数器加一
-            metrics.errorCount.increment();
+            errorCount.increment();
         } finally {
         }
         return result;
