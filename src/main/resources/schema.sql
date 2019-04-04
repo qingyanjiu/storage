@@ -144,7 +144,7 @@ create view storage_view_goods as
   select
     `g`.`goodsid`       as `goodsid`,
     `g`.`userid`       as `userid`,
-    `g`.`goodsname`      as `goodsname`,
+    `g`.`goodname`      as `goodsname`,
     `g`.`owername`      as `owername`,
     `g`.`picture`       as `picture`,
     `g`.`location`      as `location`,
