@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.*;
 
 @Controller
@@ -25,12 +22,14 @@ public class TestController {
 
     @RequestMapping("")
     @ResponseBody
-    public MyRequest testBatch(String id) throws ExecutionException, InterruptedException {
+    public Map testBatch(String id) throws ExecutionException, InterruptedException {
+        Map res = new HashMap();
         MyRequest request = new MyRequest(id);
         CompletableFuture completableFuture = new CompletableFuture();
         request.setFt(completableFuture);
         q.add(request);
-        return request.getFt().get();
+        res.put("data",request.getFt().get());
+        return res;
     }
 
     @PostConstruct
