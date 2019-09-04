@@ -36,6 +36,7 @@ public class TestController {
     public void init() {
         ScheduledExecutorService ses = Executors.newScheduledThreadPool(1);
         ses.scheduleAtFixedRate(() -> {
+            all.clear();
             int size = q.size();
             if (q.size() == 0) {
                 return;
@@ -46,7 +47,7 @@ public class TestController {
                 requests.add(request);
             }
             query(requests);
-            System.out.println("number:" + size + "result:" + all);
+            System.out.println("number:" + size);
 
             requests.forEach(r -> {
                 r.getFt().complete(all.get(r.getId()));
