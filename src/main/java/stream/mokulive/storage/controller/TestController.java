@@ -53,7 +53,7 @@ public class TestController {
                 r.getFt().complete(all.get(r.getId()));
             });
 
-        }, 0, 5000, TimeUnit.MILLISECONDS);
+        }, 0, 200, TimeUnit.MILLISECONDS);
     }
 
     private void query(List<MyRequest> requests) {
