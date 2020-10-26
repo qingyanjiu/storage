@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import live.moku.common.utils.PageUtils;
 import live.moku.common.utils.R;
+import live.moku.modules.sys.controller.AbstractController;
 import live.moku.storage.entity.StorageGoodsEntity;
 import live.moku.storage.service.StorageGoodsService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -25,7 +26,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("storage/storagegoods")
 @Api("物品接口")
-public class StorageGoodsController {
+public class StorageGoodsController extends AbstractController {
     @Autowired
     private StorageGoodsService storageGoodsService;
 

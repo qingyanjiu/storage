@@ -5,6 +5,7 @@ import java.util.Map;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import live.moku.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ import live.moku.common.utils.R;
 @RestController
 @RequestMapping("storage/storagehotpoints")
 @Api("热点接口")
-public class StorageHotPointsController {
+public class StorageHotPointsController extends AbstractController {
     @Autowired
     private StorageHotPointsService storageHotPointsService;
 

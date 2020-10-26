@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import live.moku.common.utils.PageUtils;
 import live.moku.common.utils.R;
+import live.moku.modules.sys.controller.AbstractController;
 import live.moku.storage.entity.StorageBuildingEntity;
 import live.moku.storage.service.StorageBuildingService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -24,7 +25,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("storage/storagebuilding")
 @Api("住房接口")
-public class StorageBuildingController {
+public class StorageBuildingController extends AbstractController {
     @Autowired
     private StorageBuildingService storageBuildingService;
 
@@ -60,6 +61,7 @@ public class StorageBuildingController {
     @ApiOperation("新增住房")
     @RequiresPermissions("storage:storagebuilding:save")
     public R save(@RequestBody StorageBuildingEntity storageBuilding) {
+        storageBuilding.setUserid(getUserId());
         storageBuildingService.save(storageBuilding);
 
         return R.ok();

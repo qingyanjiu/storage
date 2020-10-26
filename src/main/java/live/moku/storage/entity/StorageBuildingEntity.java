@@ -27,7 +27,7 @@ public class StorageBuildingEntity implements Serializable {
 	/**
 	 * 用户id
 	 */
-	private String userid;
+	private Long userid;
 	/**
 	 * 建筑物名字
 	 */
