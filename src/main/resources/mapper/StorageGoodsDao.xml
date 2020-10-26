@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="live.moku.storage.dao.StorageGoodsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="live.moku.storage.entity.StorageGoodsEntity" id="storageGoodsMap">
+        <result property="goodsid" column="goodsid"/>
+        <result property="userid" column="userid"/>
+        <result property="goodname" column="goodname"/>
+        <result property="owername" column="owername"/>
+        <result property="picture" column="picture"/>
+        <result property="hotpointid" column="hotpointid"/>
+        <result property="location" column="location"/>
+        <result property="typeid" column="typeid"/>
+        <result property="tag" column="tag"/>
+        <result property="buytime" column="buytime"/>
+        <result property="price" column="price"/>
+        <result property="throwtime" column="throwtime"/>
+        <result property="modifytime" column="modifytime"/>
+        <result property="comment" column="comment"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+
+</mapper>

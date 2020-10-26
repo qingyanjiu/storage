@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="live.moku.storage.dao.StorageHotPointsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="live.moku.storage.entity.StorageHotPointsEntity" id="storageHotPointsMap">
+        <result property="id" column="id"/>
+        <result property="userid" column="userid"/>
+        <result property="buildingid" column="buildingid"/>
+        <result property="xstart" column="xstart"/>
+        <result property="ystart" column="ystart"/>
+        <result property="xend" column="xend"/>
+        <result property="yend" column="yend"/>
+        <result property="hotpointname" column="hotpointname"/>
+        <result property="comment" column="comment"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+
+</mapper>

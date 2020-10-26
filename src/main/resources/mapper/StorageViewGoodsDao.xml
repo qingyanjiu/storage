@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="live.moku.storage.dao.StorageViewGoodsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="live.moku.storage.entity.StorageViewGoodsEntity" id="storageViewGoodsMap">
+        <result property="goodsid" column="goodsid"/>
+        <result property="userid" column="userid"/>
+        <result property="goodsname" column="goodsname"/>
+        <result property="owername" column="owername"/>
+        <result property="picture" column="picture"/>
+        <result property="location" column="location"/>
+        <result property="hotpointid" column="hotpointid"/>
+        <result property="typeid" column="typeid"/>
+        <result property="tag" column="tag"/>
+        <result property="buytime" column="buytime"/>
+        <result property="price" column="price"/>
+        <result property="throwtime" column="throwtime"/>
+        <result property="modifytime" column="modifytime"/>
+        <result property="goodscomment" column="goodscomment"/>
+        <result property="goodstatus" column="goodstatus"/>
+        <result property="buildingid" column="buildingid"/>
+        <result property="xstart" column="xstart"/>
+        <result property="ystart" column="ystart"/>
+        <result property="xend" column="xend"/>
+        <result property="yend" column="yend"/>
+        <result property="hotpointname" column="hotpointname"/>
+        <result property="hotpointcomment" column="hotpointcomment"/>
+        <result property="hotpointstatus" column="hotpointstatus"/>
+        <result property="buildingname" column="buildingname"/>
+        <result property="planpicture" column="planpicture"/>
+        <result property="buildingcomment" column="buildingcomment"/>
+        <result property="typename" column="typename"/>
+        <result property="parenttypeid" column="parenttypeid"/>
+        <result property="typecomment" column="typecomment"/>
+    </resultMap>
+
+
+</mapper>
