@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import live.moku.common.utils.PageUtils;
 import live.moku.storage.entity.StorageBuildingEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface StorageBuildingService extends IService<StorageBuildingEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<StorageBuildingEntity> qryUserBuildings(long userId);
 }
 

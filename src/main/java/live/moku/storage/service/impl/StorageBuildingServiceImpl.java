@@ -1,6 +1,8 @@
 package live.moku.storage.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -24,6 +26,11 @@ public class StorageBuildingServiceImpl extends ServiceImpl<StorageBuildingDao, 
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<StorageBuildingEntity> qryUserBuildings(long userId) {
+        return this.list(new QueryWrapper<StorageBuildingEntity>().eq("userid", userId));
     }
 
 }

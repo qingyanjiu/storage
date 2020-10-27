@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -89,6 +90,15 @@ public class StorageBuildingController extends AbstractController {
         storageBuildingService.removeByIds(Arrays.asList(buildingids));
 
         return R.ok();
+    }
+
+    @RequestMapping(value = "/qryUserBuildings", method = {RequestMethod.GET})
+    @ApiOperation("查询用户住房信息")
+    @RequiresPermissions("storage:storagebuilding:list")
+    public R qryUserBuildings() {
+        List<StorageBuildingEntity> buildingEntityList = storageBuildingService.qryUserBuildings(getUserId());
+
+        return R.ok().put("buildings", buildingEntityList);
     }
 
 }
